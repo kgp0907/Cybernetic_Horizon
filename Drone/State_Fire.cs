@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class State_Fire : DState<Drone>
 {
-   
-    public float bullettime = 0;
+    private bool Fire = false;
+
     public void OnEnter(Drone drone)
     {
         drone.StartCoroutine(FireCoroutine(drone));
-       drone.StartCoroutine(FireTurn(drone));
+       drone.StartCoroutine(FireBullet(drone));
     }
 
     public void OnUpdate(Drone drone)
     {
-
-      // drone.StartCoroutine(FireTurn(drone));
-   
-
+  
     }
 
     public void OnFixedUpdate(Drone drone)
@@ -27,35 +24,38 @@ public class State_Fire : DState<Drone>
 
     public void OnExit(Drone drone)
     {
-        drone.droneani.SetTrigger("Fire");
-       
+          
+
     }
 
     IEnumerator FireCoroutine(Drone drone)
     {
+      
+        Fire = true;
         drone.droneani.SetTrigger("Fire");
         GameObject Blast = ObjectPoolingManager.Instance.GetObject("Drone_Blast", drone.Blast_Pos);
         GameObject Muzzle = ObjectPoolingManager.Instance.GetObject("Drone_Muzzle", drone.Muzzle_Pos);
-        yield return drone.FireTime;
+        yield return new WaitForSeconds(drone.FireTime);
         ObjectPoolingManager.Instance.ReturnObject("Drone_Blast", Blast);
         ObjectPoolingManager.Instance.ReturnObject("Drone_Muzzle", Muzzle);
+        Fire = false;
         drone.ChangeState(Drone.dState.Idle);
+
     }
 
-    IEnumerator FireTurn(Drone drone)
+    IEnumerator FireBullet(Drone drone)
     {
-        while (true)
+        while (Fire)
         {
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(drone.fireRate);
             GameObject Bullet = ObjectPoolingManager.Instance.GetObject_Noparent("Drone_Bullet", drone.Blast_Pos);
-            Fireend(drone, Bullet);
+            drone.StartCoroutine(ReturnBullet(Bullet));
         }
-      
-
     }
-   IEnumerator Fireend(Drone drone,GameObject bullet)
+
+    IEnumerator ReturnBullet(GameObject bullet)
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1f);
         ObjectPoolingManager.Instance.ReturnObject("Drone_Bullet", bullet);
     }
 }

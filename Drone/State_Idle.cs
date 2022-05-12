@@ -6,7 +6,7 @@ public class State_Idle : DState<Drone>
 {
     public void OnEnter(Drone drone)
     {
-
+        Debug.Log("돌아왔어");
     }
 
     public void OnUpdate(Drone drone)

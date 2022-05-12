@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class RobotP1_State_Ready : Robot_State<Robot_P1>
 {
+ //   private Robot_P1_Pattern robotP1_Pattern;
+    Animator enemyani;
     public void OnEnter(Robot_P1 robot_p1)
     {
-        Debug.Log("Âü±â");
-    }
-
-    public void OnUpdate(Robot_P1 robot_p1)
-    {
-
-
+        robot_p1.StopMove();
+        robot_p1.StartCoroutine(AtkReadyCoroutine(robot_p1));
     }
 
     public void OnExit(Robot_P1 robot_p1)
@@ -23,5 +20,31 @@ public class RobotP1_State_Ready : Robot_State<Robot_P1>
     public void OnFixedUpdate(Robot_P1 robot_p1)
     {
 
+    }
+
+    public void OnUpdate(Robot_P1 robot_p1)
+    {
+      //  robot_p1.StopMove();
+    }
+    public IEnumerator AtkReadyCoroutine(Robot_P1 robot_p1)
+    {
+        robot_p1.Attacking = true;
+       
+        while (robot_p1.ActReadyTime >= 0f)
+        {
+            robot_p1.ActReadyTime -= Time.deltaTime;
+            Rotation(robot_p1);
+            yield return null;
+        }
+        robot_p1.robotP1_Pattern.NextState(robot_p1);
+        robot_p1.ActReadyTime = robot_p1.actReadyTime;
+    }
+    public void Rotation(Robot_P1 robot_p1)
+    {
+        var targetPos = robot_p1.target.position;
+        targetPos.y = robot_p1.transform.position.y;
+        var targetDir = Quaternion.LookRotation(targetPos - robot_p1.transform.position);
+        robot_p1.transform.rotation = Quaternion.Slerp(robot_p1.transform.rotation, targetDir,
+                                                     robot_p1.RotationSpeed * Time.deltaTime);
     }
 }

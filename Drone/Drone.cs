@@ -18,7 +18,7 @@ public class Drone : MonoBehaviour
     public Quaternion offset2;
     public GameObject Blast_Pos;
     public GameObject Muzzle_Pos;
-    public float FireTime = 5f;
+    public float FireTime = 10f;
     //private bool HealSkill = true;
 
     //private float AttackCoolTime;
@@ -40,7 +40,7 @@ public class Drone : MonoBehaviour
         d_states.Add(dState.Fire, new State_Fire());
         d_states.Add(dState.Heal, new State_Heal());
         d_states.Add(dState.Idle, new State_Idle());
-        d_sm = new dStateMachine<Drone>(this, d_states[dState.Fire]);
+        d_sm = new dStateMachine<Drone>(this, d_states[dState.Idle]);
        
     }
 

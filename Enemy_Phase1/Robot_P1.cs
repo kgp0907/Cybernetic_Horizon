@@ -11,10 +11,24 @@ public class Robot_P1 : MonoBehaviour
         ATTACK_TAKEDOWN,
         ATTACK_CLAP,
         DEAD,
-        BORN
+        BORN,
+        PUNCH
     }
+    public enum RobotP2_State
+    {
+        PUNCH
+    }
+    public bool phase2 = false;
+    public GameObject Phase2;
+    public GameObject RobotSpawner;
+    public Robot_P1_Pattern robotP1_Pattern;
+    public float RotationSpeed = 1f;
     public float SightRange = 30f;
+    public float ActReadyTime = 2f;
+    public float actReadyTime = 4f;
+    public bool dead = false;
     public Animator Phase1_Animator;
+    public Animator Phase2_Animator;
     public NavMeshAgent navMeshAgent;
     public float AttackRange = 10f;
     public bool Attacking = false;
@@ -35,6 +49,8 @@ public class Robot_P1 : MonoBehaviour
         r_states.Add(RobotP1_State.ATTACK_CLAP, new RobotP1_State_Clap());
         r_states.Add(RobotP1_State.BORN, new RobotP1_State_Born());
         r_states.Add(RobotP1_State.DEAD, new RobotP1_State_Dead());
+        r_states.Add(RobotP1_State.PUNCH, new RobotP2_State_Punch());
+      //  r_states.Add(RobotP1_State.PUNCH, new RobotP2_State_Punch());
         r_sm = new rStateMachine<Robot_P1>(this, null);
     }
 
@@ -57,5 +73,23 @@ public class Robot_P1 : MonoBehaviour
     public void ChangeState(RobotP1_State state)
     {
         r_sm.SetState(r_states[state]);
+    }
+
+    public void StartMove()
+    {
+        if (!phase2)
+            Phase1_Animator.SetBool("Walk", true);
+        else
+        Phase2_Animator.SetBool("Walk", true);
+        navMeshAgent.isStopped = false;
+    }
+    public void StopMove()
+    {
+        navMeshAgent.velocity = Vector3.zero;
+        if(!phase2)
+        Phase1_Animator.SetBool("Walk", false);
+        else
+        Phase2_Animator.SetBool("Walk", false);
+        navMeshAgent.isStopped = true;
     }
 }

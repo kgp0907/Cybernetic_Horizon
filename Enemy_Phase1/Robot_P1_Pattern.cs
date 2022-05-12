@@ -6,7 +6,7 @@ public class Robot_P1_Pattern : MonoBehaviour
 {
     Robot_P1 robotP1;
     Robot_AI robotAi;
-
+  
     public string[] Pattern;
     public string[] PatternCycle;
     List<string> patternStorage;
@@ -70,6 +70,12 @@ public class Robot_P1_Pattern : MonoBehaviour
                 break;
             case "Takedown":
                 robotP1.ChangeState(Robot_P1.RobotP1_State.ATTACK_TAKEDOWN);
+                break;
+            case "Dead":
+                robotP1.ChangeState(Robot_P1.RobotP1_State.DEAD);
+                break;
+            case "Punch":
+                robotP1.ChangeState(Robot_P1.RobotP1_State.PUNCH);
                 break;
 
         }

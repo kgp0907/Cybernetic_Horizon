@@ -38,4 +38,5 @@ public class State_NormalAtk1 : IState<Player>
         yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.5f);
        // ObjectPoolingManager.Instance.ReturnObject("Slash", Slash);
     }
+    
 }

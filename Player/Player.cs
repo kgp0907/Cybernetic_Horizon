@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     public GameObject DeadAtkColision;
     public GameObject[] WeaponPos;
     public GameObject Character;
-    //
+
     void Start()
     {
        // RagDoll.SetActive(false);
