@@ -10,12 +10,7 @@ public class Robot_AI : MonoBehaviour
     {
         robotp1_Pattern = this.transform.GetComponent<Robot_P1_Pattern>();
         robotP1 = this.transform.GetComponent<Robot_P1>();
-        if(!robotP1.phase2)
         robotP1.ChangeState(Robot_P1.RobotP1_State.BORN);
-        else
-        {
-            robotP1.ChangeState(Robot_P1.RobotP1_State.CHASE);
-        }
     }
     
     private void Update()

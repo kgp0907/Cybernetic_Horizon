@@ -77,6 +77,21 @@ public class Robot_P1_Pattern : MonoBehaviour
             case "Punch":
                 robotP1.ChangeState(Robot_P1.RobotP1_State.PUNCH);
                 break;
+            case "Smash":
+                robotP1.ChangeState(Robot_P1.RobotP1_State.SMASH);
+                break;
+            case "missile":
+                robotP1.ChangeState(Robot_P1.RobotP1_State.HOMING_MISSILE);
+                break;
+            case "earth":
+                robotP1.ChangeState(Robot_P1.RobotP1_State.EARTHQUAKE);
+                break;
+            case "claw":
+                robotP1.ChangeState(Robot_P1.RobotP1_State.CLAW_ATTACK);
+                break;
+            case "bomb":
+                robotP1.ChangeState(Robot_P1.RobotP1_State.BOMB);
+                break;
 
         }
     }

@@ -11,7 +11,7 @@ public class RobotP1_State_Chase : Robot_State<Robot_P1>
 
     public void OnUpdate(Robot_P1 robot_p1)
     {
-        Debug.Log("ยัดยม฿");
+
         float Distance = (robot_p1.target.position - robot_p1.transform.position).magnitude;
 
        // robot_p1.Phase1_Animator.SetFloat("MoveSpeed", robot_p1.navMeshAgent.velocity.magnitude);
