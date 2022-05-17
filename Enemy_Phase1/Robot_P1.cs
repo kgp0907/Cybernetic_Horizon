@@ -11,7 +11,6 @@ public class Robot_P1 : MonoBehaviour
        CHASE,
        READY,
 
-
        P1_ATTACK_TAKEDOWN,
        P1_ATTACK_CLAP,
     
@@ -24,43 +23,32 @@ public class Robot_P1 : MonoBehaviour
        P3_ATTACK_EARTHQUAKE
     }
     public string p1_id;
- 
+    public Robot_P2 RobotP2;
+    public Robot_P3 RobotP3;
     public float AttackRange = 10f;
     public float SightRange = 30f;
     public float RotationSpeed = 1f;
     public float ActReadyTime = 2f;
     public float actReadyTime = 4f;
   
-    public bool RangedMode = false;
+  
     public bool Attacking = false;
     public bool dead = false;
-    public bool phase2 = false;
-    public bool phase3 = false;
+
+    public bool RangedMode = false;
     public GameObject Phase2;
     public GameObject Phase3;
     public GameObject RobotSpawner;
     public Robot_P1_Pattern robotP1_Pattern;
-   
-
+  
     public Animator Robot_Animator;
     public NavMeshAgent navMeshAgent;
-
-  
     public Transform target;
     public Robot_AI robotAi;
- 
     public GameObject ImpactEffectPos;
-    public GameObject[] BombRespawnPos;
-    public GameObject[] MissilePos;
     public GameObject Colision_P1_RightArm;
     public GameObject Colision_P1_LeftArm;
 
-    public GameObject Colision_P2_RightArm;
-    public GameObject Colision_P2_LeftArm;
-
-    public GameObject Colision_P3_RightLeg;
-    public GameObject Colision_P3_RightArm;
-    public GameObject Colision_P3_LeftArm;
 
     public bool AnimationName => Robot_Animator.GetCurrentAnimatorStateInfo(0).IsName(p1_id);
     public float AnimationProgress => Robot_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;

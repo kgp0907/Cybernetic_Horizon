@@ -8,11 +8,11 @@ public class RobotP1_State_Born : Robot_State<Robot_P1>
 
     public void OnEnter(Robot_P1 robot_p1)
     {
-        if (robot_p1.dead && robot_p1.phase3)
+        if (robot_p1.dead && robot_p1.RobotP3.phase3)
         {
             robot_p1.StartCoroutine(Phase3SwitchCoroutine(robot_p1));
         }
-        else if (robot_p1.dead&& robot_p1.phase2)
+        else if (robot_p1.dead&& robot_p1.RobotP2.phase2)
         {
             robot_p1.StartCoroutine(Phase2SwitchCoroutine(robot_p1));
         }

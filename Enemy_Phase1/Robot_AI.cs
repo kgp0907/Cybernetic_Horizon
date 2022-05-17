@@ -16,13 +16,13 @@ public class Robot_AI : MonoBehaviour
     private void Update()
     {
 
-        if (robotP1.phase3)
+        if (robotP1.RobotP3.phase3)
         {
-           // int rand = Random.Range(0, 2);
+            // int rand = Random.Range(0, 2);
             float distance = (robotP1.target.position - robotP1.transform.position).sqrMagnitude;
             if (distance >= robotP1.SightRange * robotP1.SightRange && robotP1.IsState(Robot_P1.RobotP1_State.CHASE))
             {
-                robotP1.RangedMode = true;
+                robotP1.RobotP3.RangedMode = true;
                 robotP1.ChangeState(Robot_P1.RobotP1_State.READY);
             }
         }

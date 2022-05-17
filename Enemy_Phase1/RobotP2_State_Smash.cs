@@ -33,9 +33,9 @@ public class RobotP2_State_Smash : Robot_State<Robot_P1>
         yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.37f);
         GameObject shockwave= ObjectPoolingManager.Instance.GetObject_Noparent("Shockwave", robot_p1.ImpactEffectPos);
         GameObject ex06= ObjectPoolingManager.Instance.GetObject_Noparent("ex06", robot_p1.ImpactEffectPos);
-        robot_p1.Colision_P2_LeftArm.SetActive(true);
+        robot_p1.RobotP2.Colision_P2_LeftArm.SetActive(true);
         yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.42f);
-        robot_p1.Colision_P2_LeftArm.SetActive(false);
+        robot_p1.RobotP2.Colision_P2_LeftArm.SetActive(false);
         yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.8f);
         ObjectPoolingManager.Instance.ReturnObject("Shockwave", shockwave);
         ObjectPoolingManager.Instance.ReturnObject("ex06", ex06);

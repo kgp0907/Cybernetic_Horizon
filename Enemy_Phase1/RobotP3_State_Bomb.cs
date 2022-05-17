@@ -36,15 +36,15 @@ public class RobotP3_State_Bomb : Robot_State<Robot_P1>
         ShakeCamera.instance.OnShakeCamera(0.15f, 0.15f);
         yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.57f);
         ShakeCamera.instance.OnShakeCamera(0.3f, 0.3f);
-        GameObject bomb1 = ObjectPoolingManager.Instance.GetObject_Noparent("bomb", robot_p1.BombRespawnPos[0]);
+        GameObject bomb1 = ObjectPoolingManager.Instance.GetObject_Noparent("bomb", robot_p1.RobotP3.BombRespawnPos[0]);
         robot_p1.StartCoroutine(ReturnCoroutine(bomb1));
         yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.62f);
         ShakeCamera.instance.OnShakeCamera(0.3f, 0.3f);
-        GameObject bomb2= ObjectPoolingManager.Instance.GetObject_Noparent("bomb", robot_p1.BombRespawnPos[1]);
+        GameObject bomb2= ObjectPoolingManager.Instance.GetObject_Noparent("bomb", robot_p1.RobotP3.BombRespawnPos[1]);
         robot_p1.StartCoroutine(ReturnCoroutine(bomb2));
         yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.67f);
         ShakeCamera.instance.OnShakeCamera(0.3f, 0.3f);
-        GameObject bomb3 = ObjectPoolingManager.Instance.GetObject_Noparent("bomb", robot_p1.BombRespawnPos[2]);
+        GameObject bomb3 = ObjectPoolingManager.Instance.GetObject_Noparent("bomb", robot_p1.RobotP3.BombRespawnPos[2]);
         robot_p1.StartCoroutine(ReturnCoroutine(bomb3));
         yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.72f);
  

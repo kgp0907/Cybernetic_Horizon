@@ -8,7 +8,7 @@ public class RobotP1_State_Dead : Robot_State<Robot_P1>
     {
         Debug.Log("»ç¸Á");
         robot_p1.dead = true;
-        if(robot_p1.phase2)
+        if(robot_p1.RobotP2.phase2)
         robot_p1.StartCoroutine(TransForm_Phase3(robot_p1));
         else
         {
@@ -36,7 +36,7 @@ public class RobotP1_State_Dead : Robot_State<Robot_P1>
         robot_p1.p1_id = "dead";
         robot_p1.Robot_Animator.SetTrigger("dead");
         yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.9f);
-        robot_p1.phase2 = true;
+        robot_p1.RobotP2.phase2 = true;
         robot_p1.ChangeState(Robot_P1.RobotP1_State.BORN);
     }
 
@@ -45,7 +45,7 @@ public class RobotP1_State_Dead : Robot_State<Robot_P1>
         Debug.Log("3º¯½Å");
         robot_p1.p1_id = "3_Born";
         robot_p1.Robot_Animator.SetTrigger("3_Born"); 
-        robot_p1.phase3 = true;
+        robot_p1.RobotP3.phase3 = true;
         robot_p1.ChangeState(Robot_P1.RobotP1_State.BORN);
         yield return null;
     

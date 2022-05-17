@@ -28,7 +28,7 @@ public class RobotP1_State_Ready : Robot_State<Robot_P1>
     }
     public IEnumerator AtkReadyCoroutine(Robot_P1 robot_p1)
     {
-       
+        int rand = Random.Range(0, 3);
         robot_p1.Attacking = true;
        
         while (robot_p1.ActReadyTime >= 0f)
@@ -38,11 +38,11 @@ public class RobotP1_State_Ready : Robot_State<Robot_P1>
             yield return null;
         }
 
-        if (!robot_p1.RangedMode)
-            robot_p1.robotP1_Pattern.NextState(robot_p1);
-   
-        else
+        if (robot_p1.RobotP3.RangedMode && rand!=2)
             Phase3_RangeAtk(robot_p1);
+     
+        else
+            robot_p1.robotP1_Pattern.NextState(robot_p1);
 
         robot_p1.ActReadyTime = robot_p1.actReadyTime;
     }
@@ -66,6 +66,6 @@ public class RobotP1_State_Ready : Robot_State<Robot_P1>
         {
             robot_p1.ChangeState(Robot_P1.RobotP1_State.P3_ATTACK_BOMB);
         }
-        robot_p1.RangedMode = false;
+        robot_p1.RobotP3.RangedMode = false;
     }
 }

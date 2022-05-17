@@ -34,7 +34,7 @@ public class RobotP3_State_Missile : Robot_State<Robot_P1>
         yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.35f);
         for(int i = 0; i < 4; i++)
         {
-            ObjectPoolingManager.Instance.GetObject_Noparent("Missile", robot_p1.MissilePos[i]);
+            ObjectPoolingManager.Instance.GetObject_Noparent("Missile", robot_p1.RobotP3.MissilePos[i]);
         } 
     }
 }

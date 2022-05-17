@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy_Missile : MonoBehaviour
 {
+    public GameObject MissilePrefab;
+    public GameObject ExplosionEffect;
+    public GameObject RocketTrail;
     public float turnspeed = 6;
     public Transform partToRotate;
     private Transform target;
@@ -22,17 +25,12 @@ public class Enemy_Missile : MonoBehaviour
 
     void Start()
     {
-
+        gameObject.GetComponent<BoxCollider>().enabled = true;
         m_rigid = GetComponent<Rigidbody>();
         StartCoroutine(LaunchDelay());
         StartCoroutine(DestroyMissile());
     }
 
-
-
-
-
-    // Update is called once per frame
     private void Update()
     {
         //  UpdateTarget();
@@ -59,7 +57,6 @@ public class Enemy_Missile : MonoBehaviour
 
     void UpdateTarget()
     {
-        Debug.Log(target);
 
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(targetTag);
         float shortestDistance = Mathf.Infinity;
@@ -86,41 +83,44 @@ public class Enemy_Missile : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
-
-    {
-        ////점점 속력을 붙여줌
  
-
-        ////미사일은 앞으로 계속이동
-
-
-        ////방향을 구하고, 회전하게만듬
-  
-    }
 
     IEnumerator DestroyMissile()
     {
-        yield return new WaitForSeconds(3f);
-        ObjectPoolingManager.Instance.ReturnObject("Missile", gameObject);
+        yield return new WaitForSeconds(7f);
+        GameObject MissileExplosion= ObjectPoolingManager.Instance.GetObject_Noparent("Missileex", gameObject);
+        StartCoroutine(ReturnMissile(MissileExplosion));  
     }
 
     IEnumerator LaunchDelay()
     {
-        yield return new WaitUntil(() => m_rigid.velocity.y < 0f);
+        yield return new WaitUntil(() => m_rigid.velocity.y < 0.25f);
         yield return new WaitForSeconds(0.5f);
-
-       // m_psEffect.Play();
-
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            ObjectPoolingManager.Instance.ReturnObject("Missile", gameObject);
-            gameObject.SetActive(false);
+           StartCoroutine(StartExplosion());
         }
+    }
+
+    IEnumerator ReturnMissile(GameObject MissileExplosion)
+    {
+        RocketTrail.SetActive(false);
+        gameObject.GetComponent<BoxCollider>().enabled = false;
+        MissilePrefab.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        ObjectPoolingManager.Instance.ReturnObject("Missileex", MissileExplosion);
+        yield return new WaitForSeconds(0.5f);
+        ObjectPoolingManager.Instance.ReturnObject("Missile", gameObject);
+ 
+    }
+    IEnumerator StartExplosion()
+    {
+        yield return null;
+        GameObject MissileExplosion = ObjectPoolingManager.Instance.GetObject_Noparent("Missileex", gameObject);
+        StartCoroutine(ReturnMissile(MissileExplosion));
     }
 }
