@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using CodeMonkey.Utils;
 public class ItemWorld : MonoBehaviour
 {
   
@@ -11,13 +11,20 @@ public class ItemWorld : MonoBehaviour
        Transform transform = Instantiate(ItemAssets.Instance.pfItemWorld,position,Quaternion.identity);
 
         ItemWorld itemWorld = transform.GetComponent<ItemWorld>();
-        //Debug.Log(transform);
 
         itemWorld.SetItem(item);
-        Debug.Log(item);
         return itemWorld;
 
     }
+
+    public static ItemWorld DropItem(Vector3 dropPosition, Item item)
+    {
+        Vector3 randomDir = UtilsClass.GetRandomDir();
+        ItemWorld itemWorld = SpawnItemWorld(dropPosition + randomDir * 10f, item);
+        itemWorld.GetComponent<Rigidbody>().AddForce(randomDir * 5f, ForceMode.Impulse);
+        return itemWorld;
+    }
+
     private Item item;
 
     private SpriteRenderer spriteRenderer;
@@ -36,4 +43,13 @@ public class ItemWorld : MonoBehaviour
         meshRenderer = item.GetSprite2();
     }
  
+    public Item GetItem()
+    {
+        return item;
+    }
+
+    public void DestroySelf()
+    {
+        Destroy(gameObject);
+    }
 }

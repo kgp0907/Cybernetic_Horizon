@@ -19,4 +19,6 @@ public class ItemAssets : MonoBehaviour
     public Sprite cooltimePotionSprite;
 
     public MeshRenderer swordSprite2;
+    public MeshRenderer healthPotionSprite2;
+    public MeshRenderer cooltimePotionSprite2;
 }

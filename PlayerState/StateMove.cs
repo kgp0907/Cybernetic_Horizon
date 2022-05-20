@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StateMove : IState<Player>
 {
+    private bool useInventory=false;
     public void OnEnter(Player player)
     {
     
@@ -23,7 +24,7 @@ public class StateMove : IState<Player>
 
     public void OnUpdate(Player player)
     {
-   
+
         if (Input.GetMouseButtonDown(0))
         {
             player.ChangeState(Player.eState.NORMALATK1);
@@ -45,7 +46,23 @@ public class StateMove : IState<Player>
         {
             player.ChangeState(Player.eState.BUFF);
         }
-   
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            if (useInventory)
+            {
+                useInventory = false;
+                player.inventoryUI.SetActive(false);
+            }
+           
+            else
+            {
+                useInventory = true;
+                player.inventoryUI.SetActive(true);
+            }
+               
+        }
+
+
         //if (Input.GetKeyDown(KeyCode.O))
         //{
         //    player.ChangeState(Player.eState.DEAD);
