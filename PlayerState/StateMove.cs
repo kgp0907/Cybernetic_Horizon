@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class StateMove : IState<Player>
 {
-    private bool useInventory=false;
     public void OnEnter(Player player)
     {
     
@@ -18,7 +17,7 @@ public class StateMove : IState<Player>
     public void OnFixedUpdate(Player player)
     {
         player.inputmanager.InputMovement();
-        player.characterController.Move(player.inputmanager.velocity * Time.deltaTime);
+        player.playerController.Move(player.inputmanager.velocity * Time.deltaTime);
         player.inputmanager.Rotation();
     }
 
@@ -48,35 +47,33 @@ public class StateMove : IState<Player>
         }
         if (Input.GetKeyDown(KeyCode.I))
         {
-            if (useInventory)
+            if (player.useInventory)
             {
-                useInventory = false;
+                player.OnApplicationFocus(player.useInventory);
+                player.useInventory = false;
                 player.inventoryUI.SetActive(false);
             }
            
             else
             {
-                useInventory = true;
+                player.OnApplicationFocus(player.useInventory);
+                player.useInventory = true;                  
                 player.inventoryUI.SetActive(true);
             }
                
         }
 
 
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    player.ChangeState(Player.eState.DEAD);
-        //}
         if (Input.GetKeyDown(KeyCode.T))
         {
-            if (player.Lockon)
+            if (player.isLockOn)
             {
-                player.Lockon = false;
+                player.isLockOn = false;
                 player.PlayerAnimator.SetBool("LockOnMode", false);
             }
             else
             {
-                player.Lockon = true;
+                player.isLockOn = true;
                 player.PlayerAnimator.SetBool("LockOnMode", true);
             }
         }

@@ -27,14 +27,14 @@ public class State_NormalAtk2 : IState<Player>
 
     IEnumerator NormalAtk2Coroutine(Player player)
     {
-        player.a_id = "NormalAtk2";
+        player.animation_id = "NormalAtk2";
         player.PlayerAnimator.SetTrigger("NormalAtk2");
         yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.3f);
-       // GameObject Slash = ObjectPoolingManager.Instance.GetObject("Slash", player.WeaponPos[1]);
+        GameObject Slash = ObjectPoolingManager.Instance.GetObject("Slash", player.EffectSpawnPos[1]);
         player.AtkColision.SetActive(true);
         yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.33f);
         player.AtkColision.SetActive(false);
         yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.7f);
-       // ObjectPoolingManager.Instance.ReturnObject("Slash", Slash);
+        ObjectPoolingManager.Instance.ReturnObject("Slash", Slash);
     }
 }

@@ -27,7 +27,7 @@ public class State_SpAtk : IState<Player>
 
     IEnumerator SpAtk1Coroutine(Player player)
     {
-        player.a_id = "SpAtk";
+        player.animation_id = "SpAtk";
         player.PlayerAnimator.SetTrigger("SpAtk");
         yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.15f);
         Time.timeScale = 0.4f;
@@ -35,7 +35,7 @@ public class State_SpAtk : IState<Player>
 
         yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.35f);
         player.AtkColision.SetActive(true);
-        GameObject Smash = ObjectPoolingManager.Instance.GetObject("Smash", player.WeaponPos[3]);
+        GameObject Smash = ObjectPoolingManager.Instance.GetObject("Smash", player.EffectSpawnPos[3]);
     
         yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.4f);
         player.AtkColision.SetActive(false);

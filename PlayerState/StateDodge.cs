@@ -6,23 +6,23 @@ public class StateDodge : IState<Player>
 {
     public void OnEnter(Player player)
     {
-        player.p_takedamage.GodMode = true;
-        if (player.Lockon)
+        player.player_Hp.GodMode = true;
+        if (player.isLockOn)
         {
-            player.a_id = "Slide";
+            player.animation_id = "Slide";
             player.PlayerAnimator.SetTrigger("Slide");
         }
 
         else
         {
-            player.a_id = "Dumb";
+            player.animation_id = "Dumb";
             player.PlayerAnimator.SetTrigger("Dumb");
         }         
     }
 
     public void OnExit(Player player)
     {
-        player.p_takedamage.GodMode = false;
+        player.player_Hp.GodMode = false;
     }
 
     public void OnFixedUpdate(Player player)

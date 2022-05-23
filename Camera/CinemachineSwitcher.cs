@@ -15,7 +15,7 @@ public class CinemachineSwitcher : MonoBehaviour
     [SerializeField]
     private CinemachineVirtualCamera vcam2;
 
-    private bool overworldCamera = true;
+    public bool overworldCamera = true;
     private Animator animator;
 
     private void Awake()
@@ -42,11 +42,11 @@ public class CinemachineSwitcher : MonoBehaviour
     {
         if (overworldCamera)
         {
-            animator.Play("LockOnCamera");
+            animator.Play("FreeLookCamera");
         }
         else
         {
-            animator.Play("FreeLookCamera");
+            animator.Play("LockOnCamera");
         }
         overworldCamera = !overworldCamera;
     }

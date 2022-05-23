@@ -5,19 +5,38 @@ using UnityEngine;
 public class PlayerAttackColision : MonoBehaviour
 {
     Player player;
-    public ShakeCamera shakeCamera;
-  
+    private string tagname="Robot";
     private void Awake()
     {
         player = FindObjectOfType<Player>();
     }
-    public void OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {      
-            ShakeCamera.instance.OnShakeCamera(0.2f, 0.2f);
-           // other.GetComponent<Enemy_TekeDamage>().TakeDamage(Player.PlayerDamage);
+        if (other.gameObject.CompareTag(tagname))
+        {
+            CinemachineImpulse.Instance.CameraShake(3f);
+            other.gameObject.GetComponent<Enemy_HP>()?.TakeDamage(player.playerDamage);
         }
     }
-    
+
+
+
+    //public void OnCollisionEnter(Collision co)
+    //{
+    //    Debug.Log("치고있니");
+    //    ContactPoint contact = co.contacts[0];
+    //    Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+    //    Vector3 pos = contact.point;
+
+    //    GameObject BulletHit = ObjectPoolingManager.Instance.GetObject_Trans("Player_HitEffect", pos, rot);
+    //    StartCoroutine(HitEffectReturn(BulletHit));
+
+    //    if (co.gameObject.CompareTag("Robot"))
+    //    {
+    //        CinemachineImpulse.Instance.CameraShake(3f);
+    //        co.gameObject.GetComponent<Enemy_HP>()?.TakeDamage(5);
+    //    }
+    //}
+
 }

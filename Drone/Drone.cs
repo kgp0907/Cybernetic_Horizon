@@ -10,28 +10,22 @@ public class Drone : MonoBehaviour
         Heal,
         Idle
     }
+    public SphereCollider sphereCollider;
     public float turnSpeed = 15f;
-    public Transform partToRotate;
     public float range = 15f;
-    public bool fire = false;
- 
     public float fireRate = 0.5f;
+    public float FireTime = 10f;
+    public bool isFire = false;
+    
     public Transform Player;
-    //public Transform[] target;
-    public Vector3 offset;
-    public Quaternion offset2;
     public GameObject Blast_Pos;
     public GameObject Muzzle_Pos;
-    public float FireTime = 10f;
+    public Vector3 followOffset_Pos;
+    public Quaternion followOffset_Rot;
+
+   
     //private bool HealSkill = true;
-    private Vector3 targetPosition;
-    //private float AttackCoolTime;
-
-    //public GameObject Child;
-
-    //public static int Phase = 0;
-    //public ParticleSystem muzzle;
-    //public GameObject Heal;
+    public List<GameObject> MonsterList = new List<GameObject>();
     public Animator droneani;
     private dStateMachine<Drone> d_sm;
   
@@ -45,19 +39,11 @@ public class Drone : MonoBehaviour
         d_states.Add(dState.Heal, new State_Heal());
         d_states.Add(dState.Idle, new State_Idle());
         d_sm = new dStateMachine<Drone>(this, d_states[dState.Idle]);
-       
     }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
         d_sm.OnFixedUpdate();
-        transform.position = Vector3.Lerp(transform.position, Player.position - offset, Time.deltaTime);
-
-        if (!fire)
-        {
-            transform.rotation = Quaternion.Lerp(transform.rotation, Player.rotation * offset2, Time.deltaTime);
-        }
     }
 
     public void ChangeState(dState state)
@@ -68,13 +54,35 @@ public class Drone : MonoBehaviour
     void Update()
     {
         d_sm.OnUpdate();
+        transform.position = Vector3.Lerp(transform.position, Player.position - followOffset_Pos, Time.deltaTime);
 
+        if (!isFire)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, Player.rotation * followOffset_Rot, Time.deltaTime);
+        }
         //if (Input.GetKeyDown(KeyCode.H) && HealSkill)
         //{
         //    StartCoroutine(HealHP());
         //    StartCoroutine(CoolTime(30f));
         //}
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Robot"))
+        {
+            MonsterList.Add(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Robot"))
+        {
+            MonsterList.Remove(other.gameObject);
+        }
+    }
+
 
     //IEnumerator CoolTime(float cool)
     //{
@@ -90,26 +98,18 @@ public class Drone : MonoBehaviour
     //        HealSkill = true;
     //    }
     //}
-  
-//IEnumerator HealHP()
-//    {
-//        yield return new WaitForSeconds(1f);
-//        droneani.SetBool("Fire", false);
-//        droneani.SetTrigger("hit");
-//        Heal.SetActive(true);
-//        Player_HP_Stamina.pHp_Current += 30;
-//        yield return new WaitForSeconds(2f);
-//        Heal.SetActive(false);
-//    }
+
+    //IEnumerator HealHP()
+    //    {
+    //        yield return new WaitForSeconds(1f);
+    //        droneani.SetBool("Fire", false);
+    //        droneani.SetTrigger("hit");
+    //        Heal.SetActive(true);
+    //        Player_HP_Stamina.pHp_Current += 30;
+    //        yield return new WaitForSeconds(2f);
+    //        Heal.SetActive(false);
+    //    }
 }
-//    else if (!CameraFocus.Lockon)
-//    {
-//        droneani.SetBool("Fire", false);
-//    }
-
-
-
-//}
 
 
 

@@ -6,15 +6,15 @@ public class StateHit : IState<Player>
 {
     public void OnEnter(Player player)
     {
-        player.p_takedamage.GodMode = true;
+        player.player_Hp.GodMode = true;
         if (player.SmashHit)
         {
-            player.a_id = "Falldown";
+            player.animation_id = "Falldown";
             player.PlayerAnimator.SetTrigger("TakeDamage_Knockback");
         }
         else
         {
-            player.a_id = "Hit";
+            player.animation_id = "Hit";
             player.PlayerAnimator.SetTrigger("TakeDamage");
         }
     }
@@ -23,7 +23,7 @@ public class StateHit : IState<Player>
     {
         player.SmashHit = false;
         player.Hit = false;
-        player.p_takedamage.GodMode = false;
+        player.player_Hp.GodMode = false;
     }
 
     public void OnFixedUpdate(Player player)

@@ -18,6 +18,7 @@ public class LockonCamera : MonoBehaviour
 
     private void Update()
     {
+        
         UpdateTarget();
         if (target == null)
             return;
@@ -29,7 +30,6 @@ public class LockonCamera : MonoBehaviour
 
     void UpdateTarget()
     {
-
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;

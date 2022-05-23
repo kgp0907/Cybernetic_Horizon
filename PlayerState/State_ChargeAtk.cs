@@ -6,13 +6,15 @@ public class State_ChargeAtk : IState<Player>
 {
     public void OnEnter(Player player)
     {
-        player.p_takedamage.GodMode = true;
+        player.playerDamage *= 2;
+        player.player_Hp.GodMode = true;
         player.StartCoroutine(NormalAtk1Coroutine(player));
     }
 
     public void OnExit(Player player)
     {
-        player.p_takedamage.GodMode = false;
+        player.playerDamage /= 2;
+        player.player_Hp.GodMode = false;
     }
 
     public void OnFixedUpdate(Player player)
@@ -31,25 +33,27 @@ public class State_ChargeAtk : IState<Player>
 
     IEnumerator NormalAtk1Coroutine(Player player)
     {
-        player.a_id = "ChargeAtk";
+        player.animation_id = "ChargeAtk";
         player.PlayerAnimator.SetTrigger("ChargeAtk");
-        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.13f);
-        Time.timeScale = 0.4f;
-        player.AtkColision.SetActive(true);
-        GameObject Slash = ObjectPoolingManager.Instance.GetObject("Slash", player.WeaponPos[4]);
-
-        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.18f);
-        player.AtkColision.SetActive(false);
         yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.3f);
-        GameObject Slash2 = ObjectPoolingManager.Instance.GetObject("Slash", player.WeaponPos[0]);
-        ObjectPoolingManager.Instance.ReturnObject("Slash", Slash);
-        player.DeadAtkColision.SetActive(true);
+        player.AtkColision.SetActive(true);
+        GameObject Slash2 = ObjectPoolingManager.Instance.GetObject("Slash2", player.EffectSpawnPos[2]);
+        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.31f);
+        player.AtkColision.SetActive(false);
+        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.33f);
+        player.AtkColision.SetActive(true);
         yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.35f);
-        player.DeadAtkColision.SetActive(false);
-        Time.timeScale = 1f;
-        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.5f);
-        ObjectPoolingManager.Instance.ReturnObject("Slash", Slash2);
+        player.AtkColision.SetActive(false);
+        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.37f);
+        player.AtkColision.SetActive(true);
+        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.39f);
+        player.AtkColision.SetActive(false);
+        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.41f);
+        player.AtkColision.SetActive(true);
+        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.43f);
+        player.AtkColision.SetActive(false);
         yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.9f);
+        ObjectPoolingManager.Instance.ReturnObject("Slash2", Slash2);
         player.ChangeState(Player.eState.MOVE);
     }
 }
