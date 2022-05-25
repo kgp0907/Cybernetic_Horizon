@@ -5,23 +5,23 @@ using UIHealthAlchemy;
 public class Player_HP : MonoBehaviour
 {
     private Player player;
+    public Animator playani;
     public float PlayerHp;
     public bool GodMode = false;
 
     public ElemsHealthBar HpBar;
     public ElemsHealthBar MpBar;
-
     private void Awake()
     {
         player = FindObjectOfType<Player>();
-        HpBar.Value = PlayerHp * 0.01f;
+        HpBar.Value = PlayerHp / 100;
     }
 
     public void PlayerTakeDamage(float damage)
     {
         if (GodMode)
             return;
-        HpBar.Value -= damage *0.01f;
+        HpBar.Value -= damage / PlayerHp;
 
         if (HpBar.Value <= 0)
         {
@@ -58,7 +58,7 @@ public class Player_HP : MonoBehaviour
 
     IEnumerator ReturnEffect(GameObject HealEffect) 
     {
-        yield return YieldInstructionCache.WaitForSeconds(2f);
+        yield return new WaitForSeconds(2f);
         ObjectPoolingManager.Instance.ReturnObject("HealEffect", HealEffect);
     }
 }
