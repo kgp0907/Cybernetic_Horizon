@@ -10,12 +10,12 @@ public class CinemachineSwitcher : MonoBehaviour
     private InputAction action;
 
     [SerializeField]
-    private CinemachineFreeLook vcam1;
+    private CinemachineFreeLook FreeLookCamera;
 
     [SerializeField]
-    private CinemachineVirtualCamera vcam2;
+    private CinemachineVirtualCamera LockOnCamera;
 
-    public bool overworldCamera = true;
+    public bool isLockOnCamera = true;
     private Animator animator;
 
     private void Awake()
@@ -38,32 +38,21 @@ public class CinemachineSwitcher : MonoBehaviour
         action.performed += _ => SwitchPriority();   
     }
 
-    private void SwitchState()
-    {
-        if (overworldCamera)
-        {
-            animator.Play("FreeLookCamera");
-        }
-        else
-        {
-            animator.Play("LockOnCamera");
-        }
-        overworldCamera = !overworldCamera;
-    }
-
+    // 카메라의 우선도를 설정하는 메서드
     private void SwitchPriority()
     {
-        if (overworldCamera)
+        if (isLockOnCamera)
         {
-            vcam1.Priority = 0;
-            vcam2.Priority = 1;
+            FreeLookCamera.Priority = 1;
+            LockOnCamera.Priority = 0;
         }
         else
         {
-            vcam1.Priority = 1;
-            vcam2.Priority = 0;
+            FreeLookCamera.Priority = 0;
+            LockOnCamera.Priority = 1;
         }
-        overworldCamera = !overworldCamera;
+        isLockOnCamera = !isLockOnCamera;
     }
-
 }
+
+

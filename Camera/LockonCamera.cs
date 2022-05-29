@@ -4,37 +4,41 @@ using UnityEngine;
 
 public class LockonCamera : MonoBehaviour
 {
+    private CinemachineSwitcher cinemachineSwitcher;
     public Player player;
-    private string enemyTag = "Robot";
     Cinemachine.CinemachineVirtualCamera c_VirtualCamera;
     [SerializeField] Transform target;
-
+    public LayerMask checkLayers;
     public float SightRange = 30f;
 
     private void Awake()
     {
         c_VirtualCamera = GetComponent<Cinemachine.CinemachineVirtualCamera>();
+        cinemachineSwitcher = FindObjectOfType<CinemachineSwitcher>();
     }
 
     private void Update()
     {
-        
-        UpdateTarget();
-        if (target == null)
-            return;
+        if (cinemachineSwitcher.isLockOnCamera == true)
+        {
+            UpdateTarget();
+            if (target == null)
+                return;
 
-        Vector3 dir = target.position - player.transform.position;
-        Quaternion lookRotation = Quaternion.LookRotation(dir);
-        Vector3 rotation = lookRotation.eulerAngles;
+            Vector3 dir = target.position - player.transform.position;
+            Quaternion lookRotation = Quaternion.LookRotation(dir);
+            Vector3 rotation = lookRotation.eulerAngles;
+        }  
     }
 
     void UpdateTarget()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
-        float shortestDistance = Mathf.Infinity;
-        GameObject nearestEnemy = null;
+        Collider[] enemies = Physics.OverlapSphere(player.transform.position, SightRange, checkLayers);
 
-        foreach (GameObject enemy in enemies)
+        float shortestDistance = Mathf.Infinity;
+        Collider nearestEnemy = null;
+
+        foreach (Collider enemy in enemies)
         {
             float distanceToEnemy = Vector3.Distance(player.transform.position, enemy.transform.position);
             if (distanceToEnemy <= shortestDistance)
@@ -53,6 +57,6 @@ public class LockonCamera : MonoBehaviour
         {
             target = null;
         }
-        
+
     }
 }
