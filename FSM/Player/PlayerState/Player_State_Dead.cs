@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player_State_Dead : Base_Interface<Player>
+{
+    public void OnEnter(Player player)
+    {     
+        player.playerAnimator.SetTrigger("Dead");
+        player.GetComponent<CharacterController>().enabled = false;
+    }
+
+    public void OnExit(Player player)
+    {
+       
+    }
+
+    public void OnFixedUpdate(Player player)
+    {
+
+    }
+
+    public void OnUpdate(Player player)
+    {
+
+    }
+}

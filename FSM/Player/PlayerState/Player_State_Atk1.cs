@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player_State_Atk1 : Base_Interface<Player>
+{
+    protected string slash = "Slash";
+   
+    public void OnEnter(Player player)
+    {      
+        player.StartCoroutine(NormalAtk1(player));
+    }
+
+    public void OnExit(Player player)
+    {
+
+    }
+
+    public void OnFixedUpdate(Player player)
+    {
+        player.inputmanager.InputMovement();
+        player.inputmanager.Rotation();
+    }
+
+    public void OnUpdate(Player player)
+    {
+        player.inputmanager.ComboAtkCheck(Player.playerState.NORMALATK2);
+    }
+
+    IEnumerator NormalAtk1(Player player)
+    {
+       
+        player.animation_id = "NormalAtk1";
+        player.playerAnimator.SetTrigger(player.animation_id);
+        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.22f);
+        player.AtkColision.SetActive(true);
+        GameObject Slash = ObjectPoolingManager.Instance.GetObject(slash, player.EffectSpawnPos[0]);
+       
+        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.25f);
+        player.AtkColision.SetActive(false);
+        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.5f);
+        ObjectPoolingManager.Instance.ReturnObject(slash, Slash);
+    }
+    
+}
