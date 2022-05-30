@@ -13,6 +13,6 @@ Unity로 제작된 SCI-FI풍 액션 RPG 포트폴리오입니다.
  
     프로젝트 구현된 점 : 디자인패턴(FSM,Singleton), 플레이어, 몬스터, 최적화, 시네머신, 타임라인 등
     
-영상 링크 : https://youtu.be/cOQDno4QHZk
+ 영상  링크 : https://youtu.be/cOQDno4QHZk
 
 기술서 링크 : https://han.gl/fUbTw
