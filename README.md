@@ -1,4 +1,4 @@
-## Cybernetic_Horizon-in-progress-
+## Cybernetic_Horizon
 Unity로 제작된 SCI-FI풍 액션 RPG 포트폴리오입니다.
 
 일반적인 액션 RPG처럼 플레이가 가능하며, 디자인패턴, 시네머신, 타임라인 , MemoryPool 등의 최적화가 되어 있습니다.
