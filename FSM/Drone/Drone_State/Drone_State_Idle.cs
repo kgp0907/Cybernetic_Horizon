@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Drone_State_Idle : Base_Interface<Drone>
+public class Drone_State_Idle : Interface_Base<Drone>
 {
     public void OnEnter(Drone drone)
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// 드론의 총알 발사 스테이트
 /// </summary>
-public class Drone_State_Fire : Base_Interface<Drone>
+public class Drone_State_Fire : Interface_Base<Drone>
 {
     private bool isTarget = false;
     private float currentDist = 0;      //현재 거리
