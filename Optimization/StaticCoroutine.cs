@@ -20,7 +20,7 @@ public class StaticCoroutine : MonoBehaviour
     }
 
     // waituntil과 같은 기능을함
-    public static IEnumerator WaitUntil(string AnimationName,float AnimationProgress,Animator animator)
+    public static IEnumerator WaitUntil(string AnimationName,Animator animator, float AnimationProgress)
     {
         while (true)
         {
