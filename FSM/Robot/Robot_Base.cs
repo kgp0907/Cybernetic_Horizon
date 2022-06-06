@@ -52,7 +52,7 @@ public class Robot_Base : MonoBehaviour
 
     public bool AnimationName => robot_Animator.GetCurrentAnimatorStateInfo(0).IsName(Animation_id);
     public float AnimationProgress => robot_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-    public Dictionary<RobotP1_State, Base_Interface<Robot_Base>> robot_States = new Dictionary<RobotP1_State, Base_Interface<Robot_Base>>();
+    public Dictionary<RobotP1_State, Base_Interface<Robot_Base>> robot_States = new Dictionary<RobotP1_State, Interface_Base<Robot_Base>>();
     public Fsm_Base<Robot_Base> robot_StateMachine;
     public Fsm_Base<Robot_Base> curstate;
     void Awake()
