@@ -20,6 +20,4 @@ public class CinemachineImpulse : MonoBehaviour
     {
         impulse.GenerateImpulse(shake);
     }
-
-  
 }
