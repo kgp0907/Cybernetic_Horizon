@@ -5,6 +5,3 @@ public interface Interface_Base<T>
     void OnFixedUpdate(T sender);
     void OnUpdate(T sender);
 }
-
-
-
