@@ -5,7 +5,7 @@ using UnityEngine;
 public class ReturnObject : MonoBehaviour
 {
     public string tagName;
-    public float DurationTime;
+    public float durationTime;
 
     public void OnEnable()
     {
@@ -14,7 +14,7 @@ public class ReturnObject : MonoBehaviour
 
     IEnumerator ReturnCoroutine()
     {
-        yield return YieldInstructionCache.WaitForSeconds(DurationTime);
+        yield return StaticCoroutine.Wait(durationTime);
         ObjectPoolingManager.Instance.ReturnObject(tagName, gameObject);
     }
 }
