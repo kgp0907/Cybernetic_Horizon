@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Robot_State_Born : Base_Interface<Robot_Base>
+public class Robot_State_Born : Interface_Base<Robot_Base>
 {
     
 

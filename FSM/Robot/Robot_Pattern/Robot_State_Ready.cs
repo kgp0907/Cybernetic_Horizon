@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Robot_State_Ready : Base_Interface<Robot_Base>
+public class Robot_State_Ready : Interface_Base<Robot_Base>
 {
  //   private Robot_P1_Pattern robotP1_Pattern;
     public void OnEnter(Robot_Base robot_p1)

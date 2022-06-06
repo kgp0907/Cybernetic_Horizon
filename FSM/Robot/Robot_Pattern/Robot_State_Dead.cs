@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Robot_State_Dead : Base_Interface<Robot_Base>
+public class Robot_State_Dead : Interface_Base<Robot_Base>
 {
     public void OnEnter(Robot_Base robot_p1)
     {

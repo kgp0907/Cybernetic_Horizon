@@ -5,7 +5,7 @@ using UnityEngine;
 /// 로봇의 플레이어 추적을 담당하는 스테이트
 /// 공격이 끝나면 해당 스테이트로 전환된다.
 /// </summary>
-public class Robot_State_Chase : Base_Interface<Robot_Base>
+public class Robot_State_Chase : Interface_Base<Robot_Base>
 {
 
     public void OnEnter(Robot_Base robot)
