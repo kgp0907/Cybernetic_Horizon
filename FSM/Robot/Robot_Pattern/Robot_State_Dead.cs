@@ -31,7 +31,7 @@ public class Robot_State_Dead : Base_Interface<Robot_Base>
 
         if (robot_p1.isPhase1)
         {
-            yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.8f);
+            yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.8f);
         }
 
         if (robot_p1.isPhase3)

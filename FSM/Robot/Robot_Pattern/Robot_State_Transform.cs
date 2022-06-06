@@ -42,7 +42,7 @@ public class Robot_State_Transform : Base_Interface<Robot_Base>
         robot_p1.next_TransformObject.SetActive(true);
         robot_p1.next_TransformObject.transform.position = robot_p1.gameObject.transform.position;
         robot_p1.next_TransformObject.transform.rotation = robot_p1.gameObject.transform.rotation;
-        yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.75f);
+        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.75f);
         robot_p1.gameObject.SetActive(false);
     }
     IEnumerator Transform_Phase3(Robot_Base robot_p1)

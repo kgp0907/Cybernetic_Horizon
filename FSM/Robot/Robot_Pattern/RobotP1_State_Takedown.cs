@@ -32,20 +32,17 @@ public class RobotP1_State_Takedown : Base_Interface<Robot_Base>
         robot_p1.Animation_id = "takedown";
         robot_p1.robot_Animator.SetTrigger(robot_p1.Animation_id);
 
-        //  yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.48f);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, 0.48f, robot_p1.robot_Animator);
+        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.48f);
         CinemachineImpulse.Instance.CameraShake(3f);
         GameObject shockwave= ObjectPoolingManager.Instance.GetObject_Noparent(ShockwaveTag, robot_p1.effectPos_Shockwave);
         robot_p1.RobotP1.colision_P1_RightArm.SetActive(true);
         robot_p1.RobotP1.colision_P1_LeftArm.SetActive(true);
 
-        // yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.53f);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, 0.53f, robot_p1.robot_Animator);
+        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.53f);
         robot_p1.RobotP1.colision_P1_RightArm.SetActive(false);
         robot_p1.RobotP1.colision_P1_LeftArm.SetActive(false);
 
-        // yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.8f);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, 0.8f, robot_p1.robot_Animator);
+        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.8f);
         ObjectPoolingManager.Instance.ReturnObject(ShockwaveTag, shockwave);
     }
 

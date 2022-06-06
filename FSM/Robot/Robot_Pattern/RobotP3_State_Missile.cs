@@ -31,11 +31,9 @@ public class RobotP3_State_Missile : Base_Interface<Robot_Base>
     {
         robot_p1.Animation_id = "missile";
         robot_p1.robot_Animator.SetTrigger(robot_p1.Animation_id);
-        //    yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.18f);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, 0.18f, robot_p1.robot_Animator);
+        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.18f);
         CinemachineImpulse.Instance.CameraShake(3f);
-        //  yield return new WaitUntil(() => robot_p1.AnimationName && robot_p1.AnimationProgress >= 0.35f);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, 0.35f, robot_p1.robot_Animator);
+        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.35f);
         for (int i = 0; i < 4; i++)
         {
             ObjectPoolingManager.Instance.GetObject_Noparent(Missile, robot_p1.RobotP3.MissilePos[i]);
