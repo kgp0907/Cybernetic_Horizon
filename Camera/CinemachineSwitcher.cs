@@ -16,13 +16,6 @@ public class CinemachineSwitcher : MonoBehaviour
     private CinemachineVirtualCamera LockOnCamera;
 
     public bool isLockOnCamera = true;
-    private Animator animator;
-
-    private void Awake()
-    {
-      //  animator = GetComponent<Animator>();
-    }
-    // Start is called before the first frame update
 
     private void OnEnable()
     {
