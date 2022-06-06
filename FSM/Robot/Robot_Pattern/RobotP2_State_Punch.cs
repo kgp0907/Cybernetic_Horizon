@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotP2_State_Punch : Base_Interface<Robot_Base>
+public class RobotP2_State_Punch : Interface_Base<Robot_Base>
 {
     private WaitUntil waitforinformation;
 

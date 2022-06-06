@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotP2_State_Smash : Base_Interface<Robot_Base>
+public class RobotP2_State_Smash : Interface_Base<Robot_Base>
 {
     private readonly string ShockwaveTag = "Shockwave";
     private readonly string Phase2_Smash_Effect = "Phase2_Smash_Effect";
