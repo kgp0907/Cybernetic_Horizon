@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotP1_State_ClapAtk : Base_Interface<Robot_Base>
+public class RobotP1_State_ClapAtk : Interface_Base<Robot_Base>
 {
     public void OnEnter(Robot_Base robot_p1)
     {

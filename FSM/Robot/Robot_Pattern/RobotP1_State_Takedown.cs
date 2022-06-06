@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotP1_State_Takedown : Base_Interface<Robot_Base>
+public class RobotP1_State_Takedown : Interface_Base<Robot_Base>
 {
     private readonly string ShockwaveTag = "Shockwave";
 
