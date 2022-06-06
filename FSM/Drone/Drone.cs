@@ -29,7 +29,7 @@ public class Drone : MonoBehaviour
     public List<GameObject> targetList = new List<GameObject>();
     private Fsm_Base<Drone> drone_fsm;
   
-    private Dictionary<dState, Base_Interface<Drone>> d_states = new Dictionary<dState, Base_Interface<Drone>>();
+    private Dictionary<dState, Base_Interface<Drone>> d_states = new Dictionary<dState, Interface_Base<Drone>>();
 
     void Start()
     {
