@@ -7,7 +7,6 @@ public class Drone : MonoBehaviour
     public enum dState
     {
         Fire,
-        Heal,
         Idle
     }
     public SphereCollider sphereCollider;
@@ -34,7 +33,6 @@ public class Drone : MonoBehaviour
     void Start()
     {
         d_states.Add(dState.Fire, new Drone_State_Fire());
-        d_states.Add(dState.Heal, new Drone_State_Heal());
         d_states.Add(dState.Idle, new Drone_State_Idle());
         drone_fsm = new Fsm_Base<Drone>(this, d_states[dState.Idle]);
     }
