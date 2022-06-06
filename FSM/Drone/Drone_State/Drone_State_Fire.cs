@@ -126,33 +126,4 @@ public class Drone_State_Fire : Base_Interface<Drone>
         yield return StaticCoroutine.Wait(1.0f);
         ObjectPoolingManager.Instance.ReturnObject("Drone_Bullet", Bullet);
     }
-
-
-    //public void EnemyCheck(Drone drone)
-    //{
-    //    Collider[] colls = Physics.OverlapSphere(drone.transform.position, 30f);
-
-    //    foreach (Collider playerobj in colls)
-    //    {
-    //        if (playerobj.gameObject.CompareTag("Robot"))
-    //        {
-    //            drone.MonsterList.Add(playerobj.gameObject);
-    //        }
-    //    }
-
-    //    if (drone.MonsterList.Count > 0)
-    //    {
-    //        drone.MonsterList.Clear();
-    //    }
-    //}
-
-    //UpdateTarget(drone);
-    //if (target == null)
-    //    return;
-
-    //Vector3 dir = target.position - drone.transform.position;
-    //Quaternion lookRotation = Quaternion.LookRotation(dir);
-    //Vector3 rotation = lookRotation.eulerAngles;
-    ////vector3 rotation=quternion.lerp(partorotate.rotation,lookrotation,time deltatime*drone.turnspeed).eulerangle
-    //drone.partToRotate.rotation = Quaternion.Euler(0f,rotation.y,0f);
 }
