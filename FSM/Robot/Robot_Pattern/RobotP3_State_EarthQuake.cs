@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotP3_State_EarthQuake : Base_Interface<Robot_Base>
+public class RobotP3_State_EarthQuake : Interface_Base<Robot_Base>
 {
     public void OnEnter(Robot_Base robot_p1)
     {

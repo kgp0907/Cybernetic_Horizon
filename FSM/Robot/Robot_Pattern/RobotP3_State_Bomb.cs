@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotP3_State_Bomb : Base_Interface<Robot_Base>
+public class RobotP3_State_Bomb : Interface_Base<Robot_Base>
 {
     private string Phase3_StartEffect = "Phase3_StartEffect";
     private string Phase3_Bomb_Effect = "Phase3_Bomb_Effect";

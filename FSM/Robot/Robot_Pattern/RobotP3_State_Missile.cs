@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RobotP3_State_Missile : Base_Interface<Robot_Base>
+public class RobotP3_State_Missile : Interface_Base<Robot_Base>
 {
     private readonly string Missile = "Missile";
 
