@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
     public bool AnimationName => playerAnimator.GetCurrentAnimatorStateInfo(0).IsName(animation_id);
     public float AnimationProgress => playerAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime;
     private Fsm_Base<Player> player_StateMachine;
-    private Dictionary<playerState, Base_Interface<Player>> player_States = new Dictionary<playerState, Base_Interface<Player>>();
+    private Dictionary<playerState, Base_Interface<Player>> player_States = new Dictionary<playerState, Interface_Base<Player>>();
     #endregion
     [SerializeField] private UI_inventory uiInventory;
     private void Awake()
