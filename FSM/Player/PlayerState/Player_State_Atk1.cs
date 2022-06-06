@@ -32,13 +32,13 @@ public class Player_State_Atk1 : Base_Interface<Player>
        
         player.animation_id = "NormalAtk1";
         player.playerAnimator.SetTrigger(player.animation_id);
-        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.22f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.playerAnimator, 0.22f);
         player.AtkColision.SetActive(true);
         GameObject Slash = ObjectPoolingManager.Instance.GetObject(slash, player.EffectSpawnPos[0]);
-       
-        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.25f);
+
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.playerAnimator, 0.25f);
         player.AtkColision.SetActive(false);
-        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.5f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.playerAnimator, 0.5f);
         ObjectPoolingManager.Instance.ReturnObject(slash, Slash);
     }
     

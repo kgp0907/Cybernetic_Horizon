@@ -30,18 +30,18 @@ public class Player_State_Atk3 : Base_Interface<Player>
     {
         player.animation_id = "NormalAtk3";
         player.playerAnimator.SetTrigger("NormalAtk3");
-        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.2f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.playerAnimator, 0.2f);
         GameObject Slash = ObjectPoolingManager.Instance.GetObject("Slash3", player.EffectSpawnPos[2]);
         player.AtkColision.SetActive(true);
-        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.25f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.playerAnimator, 0.25f);
         player.AtkColision.SetActive(false);
-        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.35f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.playerAnimator, 0.35f);
         ObjectPoolingManager.Instance.ReturnObject("Slash3", Slash);
         GameObject Smash = ObjectPoolingManager.Instance.GetObject("Smash", player.EffectSpawnPos[3]);
         player.AtkColision.SetActive(true);
-        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.4f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.playerAnimator, 0.4f);
         player.AtkColision.SetActive(false);
-        yield return new WaitUntil(() => player.AnimationName && player.AnimationProgress >= 0.7f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.playerAnimator, 0.7f);
         ObjectPoolingManager.Instance.ReturnObject("Smash", Smash);
     }
 }
