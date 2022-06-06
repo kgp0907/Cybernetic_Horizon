@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_State_Atk1 : Base_Interface<Player>
+public class Player_State_Atk1 : Interface_Base<Player>
 {
     protected string slash = "Slash";
    

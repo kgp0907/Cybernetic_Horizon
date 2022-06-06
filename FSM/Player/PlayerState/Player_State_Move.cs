@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_State_Move : Base_Interface<Player>
+public class Player_State_Move : Interface_Base<Player>
 {
     public void OnEnter(Player player)
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_State_Dodge : Base_Interface<Player>
+public class Player_State_Dodge : Interface_Base<Player>
 {
     public void OnEnter(Player player)
     {
