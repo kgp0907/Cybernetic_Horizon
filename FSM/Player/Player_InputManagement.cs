@@ -7,7 +7,7 @@ public class Player_InputManagement : MonoBehaviour
     public float rotationSpeed;
     public Transform cameraTransform;
     private Vector3 moveDirection;
-    public Vector3 velocity; 
+    public Vector3 velocity;
     private float maximumSpeed = 16f;
     Player player;
 
@@ -23,8 +23,8 @@ public class Player_InputManagement : MonoBehaviour
         moveDirection = new Vector3(horizontalInput, 0, verticalInput);
         float inputMagnitude = Mathf.Clamp01(moveDirection.magnitude);
 
-        player.playerAnimator.SetFloat("horizontal", horizontalInput, 0.1f, Time.deltaTime);
-        player.playerAnimator.SetFloat("vertical", verticalInput, 0.1f, Time.deltaTime);
+        player.m_Animator.SetFloat("horizontal", horizontalInput, 0.1f, Time.deltaTime);
+        player.m_Animator.SetFloat("vertical", verticalInput, 0.1f, Time.deltaTime);
 
         float speed = inputMagnitude * maximumSpeed;
 
@@ -35,7 +35,7 @@ public class Player_InputManagement : MonoBehaviour
     }
     public void Rotation()
     {
-        if (moveDirection !=  Vector3.zero)
+        if (moveDirection != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(moveDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
