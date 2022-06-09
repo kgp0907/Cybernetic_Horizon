@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class Robot_AI : MonoBehaviour
 {
+    Player player;
     Robot_Base robot;
+    Fsm_Base<Robot_Base> fsm_base;
     Enemy_Pattern robotPattern;
+
+    private bool isTarget = false;
+    private float currentDist = 0;      //현재 거리
+    private float closetDist = 100f;    //가까운 거리
+    private float targetDist = 100f;   //타겟 거리
+    private int closeDistIndex = 0;    //가장 가까운 인덱스
+    private int targetIndex = -1;      //타겟팅 할 인덱스
+
+
     private void Start()
     {
+        fsm_base = GetComponent<Fsm_Base<Robot_Base>>();
+        player = GetComponent<Player>();
         robotPattern = this.transform.GetComponent<Enemy_Pattern>();
         robot = this.transform.GetComponent<Robot_Base>();
-        robot.ChangeState(Robot_Base.RobotP1_State.BORN);
+        robot.ChangeState(Robot_Base.Robot_State.BORN);
     }
-    
+
     private void Update()
     {
         if (robot.isPhase3 == true)
@@ -21,27 +34,31 @@ public class Robot_AI : MonoBehaviour
         }
     }
 
+
     public void AnimationEndCheck()
     {
         if (robot.AnimationName && robot.AnimationProgress >= 0.9f)
         {
+            robot.ChangeState(Robot_Base.Robot_State.CHASE);
 
-            robot.ChangeState(Robot_Base.RobotP1_State.CHASE);
-          
             robot.attacking = false;
         }
     }
 
 
     public void SwitchRangeMode()
-    { 
-            float distance = (robot.target.position - robot.transform.position).sqrMagnitude;
+    {
+        if (robot.target == null)
+            return;
 
-        if (distance >= robot.SightRange * robot.SightRange && robot.CurState(Robot_P1.RobotP1_State.CHASE) && !robot.rangedMode)
+        float distance = (robot.target.position - robot.transform.position).sqrMagnitude;
+
+        if (distance >= robot.SightRange * robot.SightRange && !robot.rangedMode && !robot.attacking && robot.isChasing)
         {
+            robot.isChasing = false;
             robot.rangedMode = true;
-            robot.ChangeState(Robot_Base.RobotP1_State.READY);
+            robot.ChangeState(Robot_Base.Robot_State.READY);
         }
     }
-    
+
 }
