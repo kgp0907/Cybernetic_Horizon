@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
+using System.Linq;
 /// <summary>
 /// 플레이어와 적의 스테이트 설정 및 변경시 호출되는 메서드
 /// </summary>
@@ -9,19 +10,24 @@ using UnityEngine;
 
 public class Fsm_Base<T> : MonoBehaviour
 {
-    public Base_Interface<T> CurState { get; protected set; }
+    public Interface_Base<T> CurState { get; set; }
 
-    private T fsm_sender;
+    private T fsm_sender { get; set; }
+    public string animation_id;
+
+    public Animator m_Animator;
+    public bool AnimationName => m_Animator.GetCurrentAnimatorStateInfo(0).IsName(animation_id);
+    public float AnimationProgress => m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
     // 현재 스테이트의 상태를 정의한다.  
-    public Fsm_Base(T sender, Base_Interface<T> state)
+    public virtual void First_State(T sender, Interface_Base<T> state)
     {
         fsm_sender = sender;
         SetState(state);
     }
 
     // 스테이트를 변경할때 호출되는 함수.
-    public void SetState(Base_Interface<T> state)
+    public void SetState(Interface_Base<T> state)
     {
         //현재 스테이트가 설정되지 않았으면 리턴한다.
         if (fsm_sender == null)
