@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.UI;
-public class CinemachineImpulse : MonoBehaviour
+public class CinemachineImpulse : SingletonBase<CinemachineImpulse>
 {
-    public static CinemachineImpulse Instance { get; private set; }
     CinemachineImpulseSource impulse;
    
     void Start()
     {
-        Instance = this;
         impulse = transform.GetComponent<CinemachineImpulseSource>();
     }
 
