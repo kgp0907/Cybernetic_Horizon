@@ -15,12 +15,11 @@ public class Drone_State_Fire : Interface_Base<Drone>
     private int targetIndex = -1;      //타겟팅 할 인덱스
     private LayerMask layerMask;
 
-   
     public void OnEnter(Drone drone)
     {
         drone.sphereCollider.radius = drone.range;
         drone.isFire = true;
-        drone.droneani.SetTrigger("Fire");
+        drone.m_Animator.SetTrigger("Fire");
         drone.StartCoroutine(Active_MuzzleEffect(drone));
         drone.StartCoroutine(FireBullet(drone));
     }
@@ -85,15 +84,14 @@ public class Drone_State_Fire : Interface_Base<Drone>
 
     public void OnFixedUpdate(Drone drone)
     {
-      
+
     }
 
     public void OnExit(Drone drone)
     {
-        drone.targetList.Clear();     
+        drone.targetList.Clear();
         isTarget = false;
         drone.sphereCollider.radius = 1;
-       
     }
 
     // 발사 이펙트를 켜주고 일정 시간후에 꺼줌
@@ -105,7 +103,7 @@ public class Drone_State_Fire : Interface_Base<Drone>
         ObjectPoolingManager.Instance.ReturnObject("Drone_Blast", Blast);
         ObjectPoolingManager.Instance.ReturnObject("Drone_Muzzle", Muzzle);
         drone.isFire = false;
-        drone.ChangeState(Drone.dState.Idle);
+        drone.ChangeState(Drone.DState.Idle);
     }
 
     // 일정시간동안 총알을 오브젝트풀링에서 꺼냄
@@ -115,7 +113,7 @@ public class Drone_State_Fire : Interface_Base<Drone>
         while (drone.isFire)
         {
             yield return StaticCoroutine.Wait(drone.atkSpeed);
-            Bullet=ObjectPoolingManager.Instance.GetObject_Noparent("Drone_Bullet", drone.blast_EftPos);
+            Bullet = ObjectPoolingManager.Instance.GetObject_Noparent("Drone_Bullet", drone.blast_EftPos);
             drone.StartCoroutine(ReturnBullet(Bullet));
         }
     }
