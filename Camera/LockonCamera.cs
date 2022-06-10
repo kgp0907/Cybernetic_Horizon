@@ -10,30 +10,35 @@ public class LockonCamera : MonoBehaviour
     [SerializeField] Transform target;
     public LayerMask checkLayers;
     public float SightRange = 30f;
+    Collider[] enemies;
 
     private void Awake()
     {
         c_VirtualCamera = GetComponent<Cinemachine.CinemachineVirtualCamera>();
         cinemachineSwitcher = FindObjectOfType<CinemachineSwitcher>();
+        enemies = Physics.OverlapSphere(player.transform.position, SightRange, checkLayers);
     }
 
     private void Update()
     {
         if (cinemachineSwitcher.isLockOnCamera == true)
         {
-            UpdateTarget();
             if (target == null)
-                return;
-
-            Vector3 dir = target.position - player.transform.position;
-            Quaternion lookRotation = Quaternion.LookRotation(dir);
-            Vector3 rotation = lookRotation.eulerAngles;
-        }  
+            {
+                UpdateTarget();
+            }
+            if (target)
+            {
+                Vector3 dir = target.position - player.transform.position;
+                Quaternion lookRotation = Quaternion.LookRotation(dir);
+                Vector3 rotation = lookRotation.eulerAngles;
+            }
+        }
     }
 
     void UpdateTarget()
     {
-        Collider[] enemies = Physics.OverlapSphere(player.transform.position, SightRange, checkLayers);
+        enemies = Physics.OverlapSphere(player.transform.position, SightRange, checkLayers);
 
         float shortestDistance = Mathf.Infinity;
         Collider nearestEnemy = null;
@@ -57,6 +62,5 @@ public class LockonCamera : MonoBehaviour
         {
             target = null;
         }
-
     }
 }
