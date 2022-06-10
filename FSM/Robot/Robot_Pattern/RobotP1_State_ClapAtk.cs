@@ -28,12 +28,12 @@ public class RobotP1_State_ClapAtk : Interface_Base<Robot_Base>
 
     IEnumerator ClapAtk(Robot_Base robot_p1)
     {
-        robot_p1.Animation_id = "clap";
-        robot_p1.robot_Animator.SetTrigger(robot_p1.Animation_id);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id,robot_p1.robot_Animator, 0.53f);
+        robot_p1.animation_id = "clap";
+        robot_p1.m_Animator.SetTrigger(robot_p1.animation_id);
+        yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.53f);
         robot_p1.RobotP1.colision_P1_RightArm.SetActive(true);
         robot_p1.RobotP1.colision_P1_LeftArm.SetActive(true);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.58f);
+        yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.58f);
         robot_p1.RobotP1.colision_P1_RightArm.SetActive(false);
         robot_p1.RobotP1.colision_P1_LeftArm.SetActive(false);
     }

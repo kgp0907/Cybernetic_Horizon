@@ -27,15 +27,18 @@ public class RobotP3_State_EarthQuake : Interface_Base<Robot_Base>
 
     IEnumerator Attack_Earthquake(Robot_Base robot_p1)
     {
-        robot_p1.Animation_id = "earth";
-        robot_p1.robot_Animator.SetTrigger(robot_p1.Animation_id);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.39f);
+        robot_p1.animation_id = "earth";
+        robot_p1.m_Animator.SetTrigger(robot_p1.animation_id);
+
+        yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.39f);
         CinemachineImpulse.Instance.CameraShake(3f);
         GameObject shockwave = ObjectPoolingManager.Instance.GetObject_Noparent("Shockwave", robot_p1.effectPos_Shockwave);
         robot_p1.RobotP3.colision_P3_RightLeg.SetActive(true);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.45f);
+
+        yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.45f);
         robot_p1.RobotP3.colision_P3_RightLeg.SetActive(false);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.9f);
+
+        yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.9f);
         ObjectPoolingManager.Instance.ReturnObject("Shockwave", shockwave);
     }
 }

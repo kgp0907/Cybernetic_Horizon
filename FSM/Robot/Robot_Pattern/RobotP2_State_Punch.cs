@@ -30,11 +30,11 @@ public class RobotP2_State_Punch : Interface_Base<Robot_Base>
 
     IEnumerator PunchAtk(Robot_Base robot_p1)
     {
-        robot_p1.Animation_id = "punch";
-        robot_p1.robot_Animator.SetTrigger(robot_p1.Animation_id);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.35f);
+        robot_p1.animation_id = "punch";
+        robot_p1.m_Animator.SetTrigger(robot_p1.animation_id);
+        yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.35f);
         robot_p1.RobotP2.colision_P2_RightArm.SetActive(true);
-        yield return StaticCoroutine.WaitUntil(robot_p1.Animation_id, robot_p1.robot_Animator, 0.4f);
+        yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.4f);
         robot_p1.RobotP2.colision_P2_RightArm.SetActive(false);
 
     }

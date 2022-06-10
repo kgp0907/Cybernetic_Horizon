@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Robot_State_Ready : Interface_Base<Robot_Base>
 {
- //   private Robot_P1_Pattern robotP1_Pattern;
+    //   private Robot_P1_Pattern robotP1_Pattern;
     public void OnEnter(Robot_Base robot_p1)
     {
         robot_p1.StopMove();
@@ -34,7 +34,7 @@ public class Robot_State_Ready : Interface_Base<Robot_Base>
     public IEnumerator AtkReadyCoroutine(Robot_Base robot_p1)
     {
         robot_p1.attacking = true;
-       
+
         while (robot_p1.ActReadyTime >= 0f)
         {
             robot_p1.ActReadyTime -= Time.deltaTime;
@@ -51,7 +51,7 @@ public class Robot_State_Ready : Interface_Base<Robot_Base>
         {
             robot_p1.robotP1_Pattern.NextState(robot_p1);
         }
-       
+
         robot_p1.ActReadyTime = robot_p1.actReadyTime;
     }
 
@@ -64,5 +64,5 @@ public class Robot_State_Ready : Interface_Base<Robot_Base>
                                                      robot_p1.RotationSpeed * Time.deltaTime);
     }
 
-  
+
 }
