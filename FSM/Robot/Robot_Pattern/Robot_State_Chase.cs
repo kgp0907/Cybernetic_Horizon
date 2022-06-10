@@ -7,22 +7,34 @@ using UnityEngine;
 /// </summary>
 public class Robot_State_Chase : Interface_Base<Robot_Base>
 {
+    private bool isTarget = false;
+    private float currentDist = 0;      //현재 거리
+    private float closetDist = 100f;    //가까운 거리
+    private float targetDist = 100f;   //타겟 거리
+    private int closeDistIndex = 0;    //가장 가까운 인덱스
+    private int targetIndex = -1;      //타겟팅 할 인덱스
 
     public void OnEnter(Robot_Base robot)
     {
+        robot.isChasing = true;
         robot.StartMove();
     }
 
     //공격범위에 들어오면 공격을 준비, 아니면 계속 추격한다.
     public void OnUpdate(Robot_Base robot)
     {
+        UpdateTarget(robot);
+        if (robot.target == null)
+        {
+            return;
+        }
 
         float distance = (robot.target.position - robot.transform.position).sqrMagnitude;
 
-        if (distance <= robot.attackRange*robot.attackRange &&
+        if (distance <= robot.attackRange * robot.attackRange &&
                         robot.attacking == false)
         {
-            robot.ChangeState(Robot_Base.RobotP1_State.READY);
+            robot.ChangeState(Robot_Base.Robot_State.READY);
         }
         else
         {
@@ -32,12 +44,45 @@ public class Robot_State_Chase : Interface_Base<Robot_Base>
 
     public void OnExit(Robot_Base robot)
     {
+        robot.isChasing = false;
         robot.StopMove();
     }
 
     public void OnFixedUpdate(Robot_Base robot)
     {
 
+
+    }
+
+    void UpdateTarget(Robot_Base robot)
+    {
+        if (robot.target)
+            return;
+
+        Collider[] enemies = Physics.OverlapSphere(robot.transform.position, robot.SightRange, robot.layerMask);
+
+        float shortestDistance = Mathf.Infinity;
+        Collider nearestEnemy = null;
+
+        foreach (Collider enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(robot.transform.position, enemy.transform.position);
+            if (distanceToEnemy <= shortestDistance)
+            {
+                shortestDistance = distanceToEnemy;
+                nearestEnemy = enemy;
+            }
+        }
+
+        if (nearestEnemy != null && shortestDistance <= robot.SightRange)
+        {
+            robot.target = nearestEnemy.transform;
+
+        }
+        else
+        {
+            robot.target = null;
+        }
     }
 }
 
