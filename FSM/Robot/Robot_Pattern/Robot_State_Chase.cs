@@ -23,7 +23,6 @@ public class Robot_State_Chase : Interface_Base<Robot_Base>
     //공격범위에 들어오면 공격을 준비, 아니면 계속 추격한다.
     public void OnUpdate(Robot_Base robot)
     {
-        UpdateTarget(robot);
         if (robot.target == null)
         {
             return;
@@ -53,36 +52,4 @@ public class Robot_State_Chase : Interface_Base<Robot_Base>
 
 
     }
-
-    void UpdateTarget(Robot_Base robot)
-    {
-        if (robot.target)
-            return;
-
-        Collider[] enemies = Physics.OverlapSphere(robot.transform.position, robot.SightRange, robot.layerMask);
-
-        float shortestDistance = Mathf.Infinity;
-        Collider nearestEnemy = null;
-
-        foreach (Collider enemy in enemies)
-        {
-            float distanceToEnemy = Vector3.Distance(robot.transform.position, enemy.transform.position);
-            if (distanceToEnemy <= shortestDistance)
-            {
-                shortestDistance = distanceToEnemy;
-                nearestEnemy = enemy;
-            }
-        }
-
-        if (nearestEnemy != null && shortestDistance <= robot.SightRange)
-        {
-            robot.target = nearestEnemy.transform;
-
-        }
-        else
-        {
-            robot.target = null;
-        }
-    }
 }
-

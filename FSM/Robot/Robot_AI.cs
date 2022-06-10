@@ -15,7 +15,7 @@ public class Robot_AI : MonoBehaviour
     private float targetDist = 100f;   //≈∏∞Ÿ ∞≈∏Æ
     private int closeDistIndex = 0;    //∞°¿Â ∞°±ÓøÓ ¿Œµ¶Ω∫
     private int targetIndex = -1;      //≈∏∞Ÿ∆√ «“ ¿Œµ¶Ω∫
-
+    private Collider[] enemies;
 
     private void Start()
     {
@@ -24,10 +24,17 @@ public class Robot_AI : MonoBehaviour
         robotPattern = this.transform.GetComponent<Enemy_Pattern>();
         robot = this.transform.GetComponent<Robot_Base>();
         robot.ChangeState(Robot_Base.Robot_State.BORN);
+        enemies = Physics.OverlapSphere(robot.transform.position, robot.SightRange, robot.layerMask);
     }
 
     private void Update()
     {
+        if (robot.target == null)
+        {
+            UpdateTarget(robot);
+        }
+
+
         if (robot.isPhase3 == true)
         {
             SwitchRangeMode();
@@ -45,6 +52,37 @@ public class Robot_AI : MonoBehaviour
         }
     }
 
+
+    void UpdateTarget(Robot_Base robot)
+    {
+        if (robot.target)
+            return;
+
+        enemies = Physics.OverlapSphere(robot.transform.position, robot.SightRange, robot.layerMask);
+
+        float shortestDistance = Mathf.Infinity;
+        Collider nearestEnemy = null;
+
+        foreach (Collider enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(robot.transform.position, enemy.transform.position);
+            if (distanceToEnemy <= shortestDistance)
+            {
+                shortestDistance = distanceToEnemy;
+                nearestEnemy = enemy;
+            }
+        }
+
+        if (nearestEnemy != null && shortestDistance <= robot.SightRange)
+        {
+            robot.target = nearestEnemy.transform;
+
+        }
+        else
+        {
+            robot.target = null;
+        }
+    }
 
     public void SwitchRangeMode()
     {
