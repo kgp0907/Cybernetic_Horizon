@@ -5,9 +5,9 @@ using UnityEngine;
 public class Player_State_Atk1 : Interface_Base<Player>
 {
     protected string slash = "Slash";
-   
+
     public void OnEnter(Player player)
-    {      
+    {
         player.StartCoroutine(NormalAtk1(player));
     }
 
@@ -29,17 +29,16 @@ public class Player_State_Atk1 : Interface_Base<Player>
 
     IEnumerator NormalAtk1(Player player)
     {
-       
+
         player.animation_id = "NormalAtk1";
-        player.playerAnimator.SetTrigger(player.animation_id);
-        yield return StaticCoroutine.WaitUntil(player.animation_id, player.playerAnimator, 0.22f);
+        player.m_Animator.SetTrigger(player.animation_id);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.22f);
         player.AtkColision.SetActive(true);
         GameObject Slash = ObjectPoolingManager.Instance.GetObject(slash, player.EffectSpawnPos[0]);
-
-        yield return StaticCoroutine.WaitUntil(player.animation_id, player.playerAnimator, 0.25f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.25f);
         player.AtkColision.SetActive(false);
-        yield return StaticCoroutine.WaitUntil(player.animation_id, player.playerAnimator, 0.5f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.5f);
         ObjectPoolingManager.Instance.ReturnObject(slash, Slash);
     }
-    
+
 }

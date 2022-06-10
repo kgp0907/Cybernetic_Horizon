@@ -6,18 +6,18 @@ public class Player_State_Move : Interface_Base<Player>
 {
     public void OnEnter(Player player)
     {
-    
+
     }
 
     public void OnExit(Player player)
     {
-       
+
     }
 
     public void OnFixedUpdate(Player player)
     {
         player.inputmanager.InputMovement();
-        player.playerController.Move(player.inputmanager.velocity * Time.deltaTime);
+        player.transform.position += (player.inputmanager.velocity * Time.deltaTime);
         player.inputmanager.Rotation();
     }
 
@@ -47,14 +47,22 @@ public class Player_State_Move : Interface_Base<Player>
                 player.useInventory = false;
                 player.inventoryUI.SetActive(false);
             }
-           
+
             else
             {
                 player.OnApplicationFocus(player.useInventory);
-                player.useInventory = true;                  
+                player.useInventory = true;
                 player.inventoryUI.SetActive(true);
             }
-               
+
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SaveDataManager.Instance.SaveGameData();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            LoadSceneManager.Instance.LoadScene("Main");
         }
     }
 

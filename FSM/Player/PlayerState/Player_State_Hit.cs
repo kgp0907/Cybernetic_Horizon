@@ -8,8 +8,8 @@ public class Player_State_Hit : Interface_Base<Player>
     {
         player.player_Hp.godMode = true;
         player.animation_id = "Falldown";
-        player.playerAnimator.SetTrigger("TakeDamage_Knockback");
-        
+        player.m_Animator.SetTrigger("TakeDamage_Knockback");
+
     }
 
     public void OnExit(Player player)
@@ -21,11 +21,11 @@ public class Player_State_Hit : Interface_Base<Player>
 
     public void OnFixedUpdate(Player player)
     {
-       
+
     }
 
     public void OnUpdate(Player player)
     {
-       player.inputmanager.AnimationEndCheck();
+        player.inputmanager.AnimationEndCheck();
     }
 }
