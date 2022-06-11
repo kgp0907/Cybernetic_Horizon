@@ -23,10 +23,8 @@ public class LockonCamera : MonoBehaviour
     {
         if (cinemachineSwitcher.isLockOnCamera == true)
         {
-            if (target == null)
-            {
-                UpdateTarget();
-            }
+            UpdateTarget();
+
             if (target)
             {
                 Vector3 dir = target.position - player.transform.position;
