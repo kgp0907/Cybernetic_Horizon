@@ -9,13 +9,10 @@ public class Robot_AI : MonoBehaviour
     Fsm_Base<Robot_Base> fsm_base;
     Enemy_Pattern robotPattern;
 
-    private bool isTarget = false;
-    private float currentDist = 0;      //현재 거리
-    private float closetDist = 100f;    //가까운 거리
-    private float targetDist = 100f;   //타겟 거리
-    private int closeDistIndex = 0;    //가장 가까운 인덱스
-    private int targetIndex = -1;      //타겟팅 할 인덱스
+    private float shortestDistance;
+    private float distanceToEnemy;
     private Collider[] enemies;
+
 
     private void Start()
     {
@@ -24,7 +21,6 @@ public class Robot_AI : MonoBehaviour
         robotPattern = this.transform.GetComponent<Enemy_Pattern>();
         robot = this.transform.GetComponent<Robot_Base>();
         robot.ChangeState(Robot_Base.Robot_State.BORN);
-        enemies = Physics.OverlapSphere(robot.transform.position, robot.SightRange, robot.layerMask);
     }
 
     private void Update()
@@ -33,7 +29,6 @@ public class Robot_AI : MonoBehaviour
         {
             UpdateTarget(robot);
         }
-
 
         if (robot.isPhase3 == true)
         {
@@ -60,12 +55,12 @@ public class Robot_AI : MonoBehaviour
 
         enemies = Physics.OverlapSphere(robot.transform.position, robot.SightRange, robot.layerMask);
 
-        float shortestDistance = Mathf.Infinity;
+        shortestDistance = Mathf.Infinity;
         Collider nearestEnemy = null;
 
         foreach (Collider enemy in enemies)
         {
-            float distanceToEnemy = Vector3.Distance(robot.transform.position, enemy.transform.position);
+            distanceToEnemy = Vector3.Distance(robot.transform.position, enemy.transform.position);
             if (distanceToEnemy <= shortestDistance)
             {
                 shortestDistance = distanceToEnemy;

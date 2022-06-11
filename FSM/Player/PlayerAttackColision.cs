@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAttackColision : MonoBehaviour
 {
     Player player;
-    private string tagName="Robot";
+    private string tagname = "Enemy";
     private void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -13,7 +13,7 @@ public class PlayerAttackColision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag(tagName))
+        if (other.gameObject.CompareTag(tagname))
         {
             CinemachineImpulse.Instance.CameraShake(3f);
             other.gameObject.GetComponent<Enemy_HP>()?.TakeDamage(player.playerDamage);
