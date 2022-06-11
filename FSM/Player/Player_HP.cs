@@ -22,7 +22,7 @@ public class Player_HP : MonoBehaviour
         if (godMode)
             return;
 
-        hpBar.Value -= damage *0.01f;
+        hpBar.Value -= damage * 0.01f;
 
         if (hpBar.Value <= 0)
         {
@@ -32,17 +32,16 @@ public class Player_HP : MonoBehaviour
         {
             player.ChangeState(Player.playerState.HIT);
         }
-
     }
 
     public void HealingHP()
     {
-        GameObject HealEffect= ObjectPoolingManager.Instance.GetObject(healEffect, player.EffectSpawnPos[4]);
-        hpBar.Value = playerHP*0.01f;
+        GameObject HealEffect = ObjectPoolingManager.Instance.GetObject(healEffect, player.EffectSpawnPos[4]);
+        hpBar.Value = playerHP * 0.01f;
         StartCoroutine(ReturnEffect(HealEffect));
     }
 
-    IEnumerator ReturnEffect(GameObject HealEffect) 
+    IEnumerator ReturnEffect(GameObject HealEffect)
     {
         yield return StaticCoroutine.Wait(2f);
         ObjectPoolingManager.Instance.ReturnObject(healEffect, HealEffect);

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Player_State_ChargeAtk : Interface_Base<Player>
 {
+    private GameObject chargeEffect_Obj;
+    private string chargeEffect = "chargeEffect";
+
     public void OnEnter(Player player)
     {
         player.playerDamage *= 2;
         player.player_Hp.godMode = true;
-        player.StartCoroutine(NormalAtk1Coroutine(player));
+        player.StartCoroutine(ChargeAtk(player));
     }
 
     public void OnExit(Player player)
@@ -19,8 +22,7 @@ public class Player_State_ChargeAtk : Interface_Base<Player>
 
     public void OnFixedUpdate(Player player)
     {
-        player.inputmanager.InputMovement();
-        player.inputmanager.Rotation();
+
     }
 
     public void OnUpdate(Player player)
@@ -31,13 +33,14 @@ public class Player_State_ChargeAtk : Interface_Base<Player>
         }
     }
 
-    IEnumerator NormalAtk1Coroutine(Player player)
+    IEnumerator ChargeAtk(Player player)
     {
         player.animation_id = "ChargeAtk";
-        player.m_Animator.SetTrigger("ChargeAtk");
+        player.m_Animator.SetTrigger(player.animation_id);
         yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.3f);
         player.AtkColision.SetActive(true);
-        GameObject Slash2 = ObjectPoolingManager.Instance.GetObject("Slash2", player.EffectSpawnPos[2]);
+        chargeEffect_Obj = ObjectPoolingManager.Instance.GetObject(chargeEffect, player.EffectSpawnPos[2]);
+
         yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.31f);
         player.AtkColision.SetActive(false);
         yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.33f);
@@ -52,8 +55,9 @@ public class Player_State_ChargeAtk : Interface_Base<Player>
         player.AtkColision.SetActive(true);
         yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.43f);
         player.AtkColision.SetActive(false);
+
         yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.9f);
-        ObjectPoolingManager.Instance.ReturnObject("Slash2", Slash2);
+        ObjectPoolingManager.Instance.ReturnObject(chargeEffect, chargeEffect_Obj);
         player.ChangeState(Player.playerState.MOVE);
     }
 }

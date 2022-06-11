@@ -7,17 +7,9 @@ public class Player_State_Dodge : Interface_Base<Player>
     public void OnEnter(Player player)
     {
         player.player_Hp.godMode = true;
-        if (player.isLockOn)
-        {
-            player.animation_id = "Slide";
-            player.playerAnimator.SetTrigger("Slide");
-        }
+        player.animation_id = "Dumb";
+        player.m_Animator.SetTrigger("Dumb");
 
-        else
-        {
-            player.animation_id = "Dumb";
-            player.playerAnimator.SetTrigger("Dumb");
-        }         
     }
 
     public void OnExit(Player player)
@@ -27,14 +19,12 @@ public class Player_State_Dodge : Interface_Base<Player>
 
     public void OnFixedUpdate(Player player)
     {
-        player.inputmanager.InputMovement();
-        player.inputmanager.Rotation();
+        player.playerCommand.Rotation();
+        player.playerCommand.Move();
     }
 
     public void OnUpdate(Player player)
     {
-       player.inputmanager.AnimationEndCheck();    
+        player.playerCommand.AnimationEndCheck();
     }
-    
-    
 }

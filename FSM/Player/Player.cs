@@ -30,12 +30,13 @@ public class Player : Fsm_Base<Player>
     public bool isHit;
     public bool isSmashHit;
     public string currentMapName;
+    public int atkIndex = 1;
     [HideInInspector]
     public Vector3 targetPosition;
 
     private Inventory inventory;
 
-    public Player_InputManagement inputmanager;
+    public PlayerCommand playerCommand;
     public GameObject AtkColision;
     public GameObject[] EffectSpawnPos;
     public GameObject inventoryUI;
@@ -46,7 +47,7 @@ public class Player : Fsm_Base<Player>
     private void Awake()
     {
         player_Hp = GetComponent<Player_HP>();
-        inputmanager = GetComponent<Player_InputManagement>();
+        playerCommand = GetComponent<PlayerCommand>();
         m_Animator = GetComponent<Animator>();
         AtkColision.SetActive(false);
 
