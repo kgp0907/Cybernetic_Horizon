@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-[Serializable] // Á÷·ÄÈ­
+[Serializable] // ì§ë ¬í™”
 
 public class GameData
 {
-    // °¢ Ã©ÅÍÀÇ Àá±İ¿©ºÎ
+    // í”Œë ˆì´ì–´ì˜ ì²´ë ¥, ìœ„ì¹˜
     public bool PlayerHP;
     public Vector3 playerPos;
     public Vector3 playerRot;
