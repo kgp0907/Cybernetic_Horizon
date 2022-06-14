@@ -73,14 +73,6 @@ public class Player : Fsm_Base<Player>
         spawn();
     }
 
-    public void spawn()
-    {
-        ItemWorld.SpawnItemWorld(new Vector3(23, -29, 77), new Item { itemType = Item.ItemType.Sword, amount = 1 });
-        ItemWorld.SpawnItemWorld(new Vector3(28, -29, 77), new Item { itemType = Item.ItemType.Sword, amount = 1 });
-        ItemWorld.SpawnItemWorld(new Vector3(28, -29, 81), new Item { itemType = Item.ItemType.CoolTimePotion, amount = 10 });
-        ItemWorld.SpawnItemWorld(new Vector3(23, -29, 81), new Item { itemType = Item.ItemType.HealthPotion, amount = 4 });
-    }
-
     void Update()
     {
         OnUpdate();
@@ -113,11 +105,6 @@ public class Player : Fsm_Base<Player>
         }
     }
 
-    public Vector3 GetPosition()
-    {
-        return transform.position;
-    }
-
     private void UseItem(Item item)
     {
         switch (item.itemType)
@@ -128,8 +115,11 @@ public class Player : Fsm_Base<Player>
                 break;
         }
     }
-    public void Shskecamera()
+
+    public Vector3 GetPosition()
     {
-        CinemachineImpulse.Instance.CameraShake(3f);
+        return transform.position;
     }
+
+   
 }
