@@ -24,9 +24,9 @@ public class Player : Fsm_Base<Player>
     #region 플레이어 능력치 변수(이펙트 생성위치, 스테이트, 공격력 등)
     public bool useInventory = false;
 
-    public Player_HP player_Hp;
-    public float playerDamage = 5f;
+    public Player_Stats player_Stats;
     public bool isAttacking = false;
+    public bool isMove = false;
     public bool isHit;
     public bool isSmashHit;
     public string currentMapName;
@@ -46,7 +46,7 @@ public class Player : Fsm_Base<Player>
     [SerializeField] private UI_inventory uiInventory;
     private void Awake()
     {
-        player_Hp = GetComponent<Player_HP>();
+        player_Stats = GetComponent<Player_Stats>();
         playerCommand = GetComponent<PlayerCommand>();
         m_Animator = GetComponent<Animator>();
         AtkColision.SetActive(false);
@@ -71,6 +71,14 @@ public class Player : Fsm_Base<Player>
         uiInventory.SetInventory(inventory);
         inventoryUI.SetActive(false);
         spawn();
+    }
+
+    public void spawn()
+    {
+        ItemWorld.SpawnItemWorld(new Vector3(23, -29, 77), new Item { itemType = Item.ItemType.Sword, amount = 1 });
+        ItemWorld.SpawnItemWorld(new Vector3(28, -29, 77), new Item { itemType = Item.ItemType.Sword, amount = 1 });
+        ItemWorld.SpawnItemWorld(new Vector3(28, -29, 81), new Item { itemType = Item.ItemType.CoolTimePotion, amount = 10 });
+        ItemWorld.SpawnItemWorld(new Vector3(23, -29, 81), new Item { itemType = Item.ItemType.HealthPotion, amount = 4 });
     }
 
     void Update()
@@ -105,21 +113,23 @@ public class Player : Fsm_Base<Player>
         }
     }
 
-    private void UseItem(Item item)
-    {
-        switch (item.itemType)
-        {
-            case Item.ItemType.HealthPotion:
-                player_Hp.HealingHP();
-                inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
-                break;
-        }
-    }
-
     public Vector3 GetPosition()
     {
         return transform.position;
     }
 
-   
+    private void UseItem(Item item)
+    {
+        switch (item.itemType)
+        {
+            case Item.ItemType.HealthPotion:
+                player_Stats.HealingHP();
+                inventory.RemoveItem(new Item { itemType = Item.ItemType.HealthPotion, amount = 1 });
+                break;
+        }
+    }
+    public void Shskecamera()
+    {
+        CinemachineImpulse.Instance.CameraShake(3f);
+    }
 }
