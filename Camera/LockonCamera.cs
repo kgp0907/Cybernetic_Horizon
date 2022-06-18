@@ -21,7 +21,7 @@ public class LockonCamera : MonoBehaviour
 
     private void Update()
     {
-        if (cinemachineSwitcher.isLockOnCamera == true)
+        if (player.playerCommand.isLockOnCamera == true)
         {
             UpdateTarget();
 
