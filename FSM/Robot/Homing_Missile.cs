@@ -16,7 +16,7 @@ public class Homing_Missile : MonoBehaviour
     void Start()
     {
         gameObject.GetComponent<BoxCollider>().enabled = true;
-        m_rigid = GetComponent<Rigidbody>(); 
+        m_rigid = GetComponent<Rigidbody>();
         StartCoroutine(DestroyMissile());
     }
 
@@ -34,7 +34,7 @@ public class Homing_Missile : MonoBehaviour
             return;
         Vector3 t_dir = (target.position - transform.position).normalized;
         transform.forward = Vector3.Lerp(transform.forward, t_dir, 0.25f); //¿ø·¡ Ã³
-    
+
     }
 
 
@@ -42,15 +42,15 @@ public class Homing_Missile : MonoBehaviour
     {
 
         yield return StaticCoroutine.Wait(5f);
-        GameObject MissileExplosionEffect= ObjectPoolingManager.Instance.GetObject_Noparent("Missle_Explosion", gameObject);
-        StartCoroutine(MissileExplosion());  
+        GameObject MissileExplosionEffect = ObjectPoolingManager.Instance.GetObject_Noparent("Missle_Explosion", gameObject);
+        StartCoroutine(MissileExplosion());
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-           StartCoroutine(MissileExplosion());
+            StartCoroutine(MissileExplosion());
         }
     }
 

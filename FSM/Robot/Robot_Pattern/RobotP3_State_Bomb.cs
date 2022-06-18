@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class RobotP3_State_Bomb : Interface_Base<Robot_Base>
 {
-    private string Phase3_StartEffect = "Phase3_StartEffect";
-    private string Phase3_Bomb_Effect = "Phase3_Bomb_Effect";
-
+    private GameObject bomb1_Obj;
+    private GameObject bomb2_Obj;
+    private GameObject bomb3_Obj;
+    private GameObject fireExplosion_Obj;
+    private GameObject fireExplosion2_Obj;
+    private string fireExplosionEffect = "fireExplosionEffect";
+    private string bombEffect = "bombEffect";
 
     public void OnEnter(Robot_Base robot_p1)
     {
@@ -35,19 +39,24 @@ public class RobotP3_State_Bomb : Interface_Base<Robot_Base>
         robot_p1.m_Animator.SetTrigger(robot_p1.animation_id);
         yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.12f);
         CinemachineImpulse.Instance.CameraShake(3f);
+
         yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.35f);
         CinemachineImpulse.Instance.CameraShake(3f);
+
         yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.57f);
         CinemachineImpulse.Instance.CameraShake(3f);
-        GameObject FireExplosion = ObjectPoolingManager.Instance.GetObject(Phase3_StartEffect, robot_p1.RobotP3.MissilePos[4]);
-        GameObject FireExplosion2 = ObjectPoolingManager.Instance.GetObject(Phase3_StartEffect, robot_p1.RobotP3.MissilePos[5]);
-        GameObject bomb1 = ObjectPoolingManager.Instance.GetObject_Noparent(Phase3_Bomb_Effect, robot_p1.RobotP3.BombRespawnPos[0]);
+        fireExplosion_Obj = ObjectPoolingManager.Instance.GetObject(fireExplosionEffect, robot_p1.RobotP3.MissilePos[4]);
+        fireExplosion2_Obj = ObjectPoolingManager.Instance.GetObject(fireExplosionEffect, robot_p1.RobotP3.MissilePos[5]);
+        bomb1_Obj = ObjectPoolingManager.Instance.GetObject_Noparent(bombEffect, robot_p1.RobotP3.BombRespawnPos[0]);
+
         yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.62f);
         CinemachineImpulse.Instance.CameraShake(3f);
-        GameObject bomb2 = ObjectPoolingManager.Instance.GetObject_Noparent(Phase3_Bomb_Effect, robot_p1.RobotP3.BombRespawnPos[1]);
+        bomb2_Obj = ObjectPoolingManager.Instance.GetObject_Noparent(bombEffect, robot_p1.RobotP3.BombRespawnPos[1]);
         yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.67f);
         CinemachineImpulse.Instance.CameraShake(3f);
-        GameObject bomb3 = ObjectPoolingManager.Instance.GetObject_Noparent(Phase3_Bomb_Effect, robot_p1.RobotP3.BombRespawnPos[2]);
+        bomb3_Obj = ObjectPoolingManager.Instance.GetObject_Noparent(bombEffect, robot_p1.RobotP3.BombRespawnPos[2]);
         yield return StaticCoroutine.WaitUntil(robot_p1.animation_id, robot_p1.m_Animator, 0.72f);
+        ObjectPoolingManager.Instance.ReturnObject(fireExplosionEffect, fireExplosion_Obj);
+        ObjectPoolingManager.Instance.ReturnObject(fireExplosionEffect, fireExplosion2_Obj);
     }
 }

@@ -6,7 +6,7 @@ public class Enemy_Pattern : MonoBehaviour
 {
     Robot_Base robot;
     Robot_AI robotAi;
-  
+
     public string[] pattern;
     public string[] patternCycle;
     List<string> patternStorage;
@@ -40,8 +40,8 @@ public class Enemy_Pattern : MonoBehaviour
         if (pattern.Length == 0)
         {
             return;
-        }      
-        else if (currentPattern > patternCount-1)//{
+        }
+        else if (currentPattern > patternCount - 1)//{
         {
             currentPattern = 0;
         }
@@ -56,7 +56,7 @@ public class Enemy_Pattern : MonoBehaviour
 
         if (patternIndex >= currentpattern.Count - 1)// 1     2
         {
-            yield return StaticCoroutine.Wait(0.1f);
+            yield return null;
             currentPattern += 1;
             patternIndex = 0;
         }
@@ -66,31 +66,31 @@ public class Enemy_Pattern : MonoBehaviour
         switch (command)
         {
             case "clap":
-                robot.ChangeState(Robot_Base.RobotP1_State.P1_ATTACK_CLAP);
+                robot.ChangeState(Robot_Base.Robot_State.P1_ATTACK_CLAP);
                 break;
             case "takedown":
-                robot.ChangeState(Robot_Base.RobotP1_State.P1_ATTACK_TAKEDOWN);
+                robot.ChangeState(Robot_Base.Robot_State.P1_ATTACK_TAKEDOWN);
                 break;
             case "dead":
-                robot.ChangeState(Robot_Base.RobotP1_State.DEAD);
+                robot.ChangeState(Robot_Base.Robot_State.DEAD);
                 break;
             case "punch":
-                robot.ChangeState(Robot_Base.RobotP1_State.P2_ATTACK_PUNCH);
+                robot.ChangeState(Robot_Base.Robot_State.P2_ATTACK_PUNCH);
                 break;
             case "smash":
-                robot.ChangeState(Robot_Base.RobotP1_State.P2_ATTACK_SMASH);
+                robot.ChangeState(Robot_Base.Robot_State.P2_ATTACK_SMASH);
                 break;
             case "missile":
-                robot.ChangeState(Robot_Base.RobotP1_State.P3_ATTACK_HOMING_MISSILE);
+                robot.ChangeState(Robot_Base.Robot_State.P3_ATTACK_HOMING_MISSILE);
                 break;
             case "earth":
-                robot.ChangeState(Robot_Base.RobotP1_State.P3_ATTACK_EARTHQUAKE);
+                robot.ChangeState(Robot_Base.Robot_State.P3_ATTACK_EARTHQUAKE);
                 break;
             case "claw":
-                robot.ChangeState(Robot_Base.RobotP1_State.P3_ATTACK_CLAW_ATTACK);
+                robot.ChangeState(Robot_Base.Robot_State.P3_ATTACK_CLAW_ATTACK);
                 break;
             case "bomb":
-                robot.ChangeState(Robot_Base.RobotP1_State.P3_ATTACK_BOMB);
+                robot.ChangeState(Robot_Base.Robot_State.P3_ATTACK_BOMB);
                 break;
 
         }
