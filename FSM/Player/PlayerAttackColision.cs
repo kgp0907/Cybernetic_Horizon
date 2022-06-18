@@ -15,7 +15,7 @@ public class PlayerAttackColision : MonoBehaviour
     {
         if (other.gameObject.CompareTag(tagname))
         {
-            CinemachineImpulse.Instance.CameraShake(3f);
+            CinemachineImpulse.Instance.CameraShake(5f);
             other.gameObject.GetComponent<Enemy_HP>()?.TakeDamage(player.playerDamage);
         }
     }

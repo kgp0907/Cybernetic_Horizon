@@ -10,6 +10,6 @@ public class Enemy_AttackColision : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
-            other.GetComponent<Player_HP>().PlayerTakeDamage(EnemyDamage);
+            other.GetComponent<Player_Stats>().PlayerTakeDamage(EnemyDamage);
     }
 }
