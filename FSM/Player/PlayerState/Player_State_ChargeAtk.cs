@@ -9,15 +9,15 @@ public class Player_State_ChargeAtk : Interface_Base<Player>
 
     public void OnEnter(Player player)
     {
-        player.playerDamage *= 2;
-        player.player_Hp.godMode = true;
+        player.player_Stats.playerDamage *= 2;
+        player.player_Stats.godMode = true;
         player.StartCoroutine(ChargeAtk(player));
     }
 
     public void OnExit(Player player)
     {
-        player.playerDamage *= 0.5f;
-        player.player_Hp.godMode = false;
+        player.player_Stats.playerDamage *= 0.5f;
+        player.player_Stats.godMode = false;
     }
 
     public void OnFixedUpdate(Player player)

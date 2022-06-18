@@ -20,7 +20,8 @@ public class Player_State_Atk2 : Interface_Base<Player>
 
     public void OnFixedUpdate(Player player)
     {
-
+        player.playerCommand.Move();
+        player.playerCommand.Rotation();
     }
 
     public void OnUpdate(Player player)
@@ -34,14 +35,16 @@ public class Player_State_Atk2 : Interface_Base<Player>
         player.atkIndex = 2;
         player.m_Animator.SetTrigger(player.animation_id);
         player.isAttacking = true;
-        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.3f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.16f);
         slashEffect_Obj = ObjectPoolingManager.Instance.GetObject(slashEffect, player.EffectSpawnPos[1]);
         player.AtkColision.SetActive(true);
 
-        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.33f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.23f);
         player.AtkColision.SetActive(false);
-
-        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.7f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.5f);
+        player.isAttacking = false;
         ObjectPoolingManager.Instance.ReturnObject(slashEffect, slashEffect_Obj);
+
+
     }
 }

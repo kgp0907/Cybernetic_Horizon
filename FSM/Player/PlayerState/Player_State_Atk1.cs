@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Player_State_Atk1 : Interface_Base<Player>
 {
+    private string normalAtk1 = "NormalAtk1";
     private GameObject slashEffect_Obj;
+    private GameObject slashEffect_Obj2;
     private string slashEffect = "slashEffect";
 
     public void OnEnter(Player player)
@@ -14,13 +16,15 @@ public class Player_State_Atk1 : Interface_Base<Player>
 
     public void OnExit(Player player)
     {
+        player.AtkColision.SetActive(false);
         player.isAttacking = false;
         player.atkIndex = 1;
     }
 
     public void OnFixedUpdate(Player player)
     {
-
+        player.playerCommand.Move();
+        player.playerCommand.Rotation();
     }
 
     public void OnUpdate(Player player)
@@ -35,15 +39,16 @@ public class Player_State_Atk1 : Interface_Base<Player>
         player.isAttacking = true;
         player.m_Animator.SetTrigger(player.animation_id);
 
-        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.22f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.24f);
         player.AtkColision.SetActive(true);
         slashEffect_Obj = ObjectPoolingManager.Instance.GetObject(slashEffect, player.EffectSpawnPos[0]);
 
-        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.25f);
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.3f);
         player.AtkColision.SetActive(false);
 
         yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.5f);
         ObjectPoolingManager.Instance.ReturnObject(slashEffect, slashEffect_Obj);
+        player.isAttacking = false;
     }
 
 }

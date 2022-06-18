@@ -11,7 +11,7 @@ public class Player_State_Atk3 : Interface_Base<Player>
 
     public void OnEnter(Player player)
     {
-        player.player_Hp.godMode = true;
+        player.player_Stats.godMode = true;
         player.isAttacking = true;
         player.StartCoroutine(NormalAtk3Coroutine(player));
     }
@@ -19,13 +19,14 @@ public class Player_State_Atk3 : Interface_Base<Player>
     public void OnExit(Player player)
     {
         player.isAttacking = false;
-        player.player_Hp.godMode = false;
+        player.player_Stats.godMode = false;
         player.atkIndex = 1;
     }
 
     public void OnFixedUpdate(Player player)
     {
-
+        player.playerCommand.Move();
+        player.playerCommand.Rotation();
     }
 
     public void OnUpdate(Player player)
@@ -48,12 +49,13 @@ public class Player_State_Atk3 : Interface_Base<Player>
 
         yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.35f);
         ObjectPoolingManager.Instance.ReturnObject(slashEffect3, slashEffect3_Obj);
-        slashEffect4_Obj = ObjectPoolingManager.Instance.GetObject(slashEffect4, player.EffectSpawnPos[3]);
+        slashEffect4_Obj = ObjectPoolingManager.Instance.GetObject_Noparent(slashEffect4, player.EffectSpawnPos[3]);
         player.AtkColision.SetActive(true);
 
         yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.4f);
         player.AtkColision.SetActive(false);
-
+        yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.6f);
+        player.isAttacking = false;
         yield return StaticCoroutine.WaitUntil(player.animation_id, player.m_Animator, 0.7f);
         ObjectPoolingManager.Instance.ReturnObject(slashEffect4, slashEffect4_Obj);
     }

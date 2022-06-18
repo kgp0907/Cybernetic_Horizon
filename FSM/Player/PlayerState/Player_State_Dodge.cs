@@ -6,7 +6,7 @@ public class Player_State_Dodge : Interface_Base<Player>
 {
     public void OnEnter(Player player)
     {
-        player.player_Hp.godMode = true;
+        player.player_Stats.godMode = true;
         player.animation_id = "Dumb";
         player.m_Animator.SetTrigger("Dumb");
 
@@ -14,13 +14,13 @@ public class Player_State_Dodge : Interface_Base<Player>
 
     public void OnExit(Player player)
     {
-        player.player_Hp.godMode = false;
+        player.player_Stats.godMode = false;
     }
 
     public void OnFixedUpdate(Player player)
     {
-        player.playerCommand.Rotation();
         player.playerCommand.Move();
+        player.playerCommand.Rotation();
     }
 
     public void OnUpdate(Player player)
