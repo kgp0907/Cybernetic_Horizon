@@ -18,4 +18,4 @@ Unity로 제작된 SCI-FI풍 액션 RPG 포트폴리오입니다.
     
  영상  링크 : https://youtu.be/cOQDno4QHZk
 
-기술서 링크 : https://han.gl/fUbTw
+기술서 링크 : https://buly.kr/1RCDTMv
